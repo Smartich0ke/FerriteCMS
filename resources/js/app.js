@@ -5,6 +5,7 @@
  */
 
 import './bootstrap';
+import 'iconify-icon';
 import { createApp } from 'vue';
 
 /**
