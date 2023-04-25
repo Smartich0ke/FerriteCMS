@@ -16,6 +16,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('root');
 })->name('root');
+Route::get('/about', function () {
+    return view('static.about');
+})->name('about');
+Route::get('/gallery', function () {
+    return view('gallery.index');
+})->name('gallery.index');
+Route::get('/posts', function () {
+    return view('posts.index');
+})->name('posts.index');
+Route::get('/posts/{slug}', function () {
+    return view('posts.show');
+})->name('posts.show');
+Route::get('/tags', function () {
+    return view('tags.index');
+})->name('tags.index');
+Route::get('/categories', function () {
+    return view('categories.index');
+})->name('categories.index');
 
 Auth::routes();
 

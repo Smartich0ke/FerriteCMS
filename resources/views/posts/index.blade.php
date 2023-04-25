@@ -1,0 +1,104 @@
+@extends('layouts.app')
+@section('content')
+
+    <div class="contentContainer">
+        <header class="d-flex flex-row justify-content-center">
+            <h1 class="text-center">All Articles</h1>
+        </header>
+
+
+        <section>
+            <!-- Sort-by dropdown -->
+            <div class="dropdown d-flex flex-row gap-2" >
+                <form action="{{ route('posts.index') }}" method="GET">
+                    <select name="filter" id="filterSelect"class="form-select d-inline-block" style="width: fit-content;">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="alphabetical">A-Z</option>
+                        <option value="reverse-alphabetical">Z-A</option>
+                    </select>
+                </form>
+            </div>
+
+        </section>
+        <article class="card p-4 cardLink my-3" onclick="window.location='{{-- Link to post --}}';">
+            <div class="d-flex flex-row justify-content-between">
+                <h2 class="">Title</h2>
+                <div>13/02/2008</div>
+            </div>
+            <div class="d-flex flex-row justify-content-start gap-2 flex-wrap">
+                <div class="text-sm text-muted">In: <a class="link lightLink" href="http://">Category</a></div>
+                <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
+                    <a class="link lightLink" href="http://">another-tag</a>, <a class="link lightLink" href="http://">other-tag</a>,
+                </div>
+            </div>
+            <hr class="mt-1 mb-3">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies
+                ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget
+                ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod,
+                nisl eget ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec
+            </p>
+        </article>
+        <article class="card p-4 cardLink my-3" onclick="window.location='{{-- Link to post --}}';">
+            <div class="d-flex flex-row justify-content-between">
+                <h2 class="">Title</h2>
+                <div>13/02/2008</div>
+            </div>
+            <div class="d-flex flex-row justify-content-start gap-2">
+                <div class="text-sm text-muted">In: <a class="link lightLink" href="http://">Category</a></div>
+                <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
+                    <a class="link lightLink" href="http://">another-tag</a>, <a class="link lightLink" href="http://">other-tag</a>,
+                </div>
+            </div>
+            <hr class="mt-1 mb-3">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies
+                ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget
+                ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod,
+                nisl eget ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec
+            </p>
+        </article>
+        <article class="card p-4 cardLink my-3" onclick="window.location='{{-- Link to post --}}';">
+            <div class="d-flex flex-row justify-content-between">
+                <h2 class="">Title</h2>
+                <div>13/02/2008</div>
+            </div>
+            <div class="d-flex flex-row justify-content-start gap-2">
+                <div class="text-sm text-muted">In: <a class="link lightLink" href="http://">Category</a></div>
+                <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
+                    <a class="link lightLink" href="http://">another-tag</a>, <a class="link lightLink" href="http://">other-tag</a>,
+                </div>
+            </div>
+            <hr class="mt-1 mb-3">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies
+                ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget
+                ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod,
+                nisl eget ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec
+            </p>
+        </article>
+        <article class="card p-4 cardLink my-3" onclick="window.location='{{-- Link to post --}}';">
+            <div class="d-flex flex-row justify-content-between">
+                <h2 class="">Title</h2>
+                <div>13/02/2008</div>
+            </div>
+            <div class="d-flex flex-row justify-content-start gap-2">
+                <div class="text-sm text-muted">In: <a class="link lightLink" href="http://">Category</a></div>
+                <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
+                    <a class="link lightLink" href="http://">another-tag</a>, <a class="link lightLink" href="http://">other-tag</a>,
+                </div>
+            </div>
+            <hr class="mt-1 mb-3">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies
+                ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget
+                ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod,
+                nisl eget ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec
+            </p>
+        </article>
+    </div>
+@endsection
+@section('post-app')
+    <script>window.addEventListener("DOMContentLoaded", (event) => {document.getElementById("filterSelect").addEventListener("change", ({ target }) => target.form.submit());});</script>
+@endsection

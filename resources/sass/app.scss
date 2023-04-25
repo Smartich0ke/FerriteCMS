@@ -10,3 +10,115 @@
 #heroTitle {
     min-height: 80vh;
 }
+.contentContainer {
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $gray-100;
+    min-height: 86vh;
+    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+    padding: 2rem;
+    border-radius: 10px;
+}
+article {
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.responsiveGrid {
+    display: grid;
+    gap: 1rem;
+
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-auto-rows: 240px;
+}
+
+@media screen and (min-width: 600px) {
+    .gridItem-tall {
+        grid-row: span 2 / auto;
+    }
+
+    .gridItem-wide {
+        grid-column: span 2 / auto;
+    }
+}
+
+.gridItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 500ms;
+    overflow: hidden;
+    background-color: $dark;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.gridItem-noImage {
+    box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 500ms;
+    overflow: hidden;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.gridItem:hover {
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-3px) scale(1.03);
+}
+.gridItem-noImage:hover {
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-3px) scale(1.01);
+}
+.lightLink {
+    color: $text-muted;
+}
+.lightLink:hover {
+    color: $text-muted;
+    text-decoration: none;
+}
+.cardLink {
+    cursor: pointer;
+}
+body {
+    background-color: $gray-100;
+}
+
+footer {
+    bottom: 0;
+}
+.sideBar {
+    height: 100vh;
+    width: 100%;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+.recentComment {
+    cursor: pointer;
+}
+.quickMetric {
+    min-width: 11rem;
+    padding: 0.7rem 1rem 0.7rem 1rem;
+    color: $gray-800;
+    border-radius: 8px;
+}
+.bg-palered {
+    background-color: $palered;
+}
+.bg-paleblue {
+    background-color: $paleblue;
+}
+.bg-palegreen {
+    background-color: $palegreen;
+}
+.bg-paleyellow {
+    background-color: $paleyellow;
+}

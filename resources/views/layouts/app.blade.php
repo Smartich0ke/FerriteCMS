@@ -42,22 +42,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('root') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="{{ route('about') }}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Gallery</a>
+                            <a class="nav-link" href="{{ route('gallery.index') }}">Gallery</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Articles
                             </a>
                             <ul class="dropdown-menu bg-light" style="border: none;" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">All Articles</a></li>
-                                <li><a class="dropdown-item" href="#">Tags</a></li>
-                                <li><a class="dropdown-item" href="#">Categories</a></li>
+                                <li><a class="dropdown-item" href="{{ route('posts.index') }}">All Articles</a></li>
+                                <li><a class="dropdown-item" href="{{ route('tags.index') }}">Tags</a></li>
+                                <li><a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -66,15 +66,22 @@
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light " type="submit">Search</button>
+                        <button class="btn @if(Route::currentRouteName() == 'root') btn-outline-light @else btn-outline-dark @endif" type="submit">Search</button>
                     </form>
                 </div>
             </div>
         </nav>
 
-        <main class="p-4">
+        <main class="p-2">
             @yield('content')
         </main>
+
+        <footer class="mt-2 mb-0">
+            <hr class="mx-5">
+            <div class="text-muted text-sm-center "><a class="text-muted" href="">Ferrite</a> Content Management System v1.0.0 by Nikolai Patrick. <a class="text-muted me-auto" href="{{ route('login') }}">Admin login</a></div>
+        </footer>
     </div>
+@yield('post-app')
 </body>
+
 </html>
