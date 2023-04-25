@@ -3,8 +3,8 @@
 
     <div class="d-flex flex-row justify-content-between w-100">
 
-        <div class="vh-100 p-5" style="width: 70%;">
-            <div class="d-flex flex-row justify-content-between w-100 mb-5">
+        <div class="vh-100 p-5 dashboardContentBetweenSideBars">
+            <div class="d-flex flex-row quickMetricContainer w-100 mb-5 flex-wrap">
                 <div class="quickMetric d-flex flex-row gap-3 align-items-center bg-paleblue">
                     <iconify-icon icon="mdi:graph-box" class="p-0" width="64" height="64"></iconify-icon>
                     <div class="">
@@ -39,13 +39,13 @@
             <div class="d-flex flex-row justify-content-between w-100">
 
                 <!-- Visitor metrics -->
-                <div style="width: 60%; height: 20rem;" class="me-4">
+                <div style="" class="me-4 visitorMetrics pb-5">
                     <h2>Site Visitors (Last 7 Days)</h2>
                     <active-users-chart></active-users-chart>
                 </div>
 
                 <!-- Browser metrics -->
-                <div style="width: 40%; height: 20rem;" class="ms-4">
+                <div class="browserMetrics">
                     <h2>Browsers</h2>
                     <browsers-chart></browsers-chart>
                 </div>
@@ -134,7 +134,7 @@
         </div>
 
         <!-- Sidebar content -->
-        <aside class="vh-100 p-5" style="width: 30%">
+        <aside class="vh-100 p-5 dashboardAside">
 
             <!-- Recent comments -->
             <div>
