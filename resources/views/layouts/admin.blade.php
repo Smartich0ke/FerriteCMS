@@ -24,44 +24,50 @@
     <div class="d-flex flex-row justify-content-start admin-panel">
 
         <nav class="d-flex flex-column flex-shrink-0 text-white bg-dark sideBar admin-nav">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none d-flex align-items-center gap-2">
+            <a aria-label="homepage" href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none d-flex align-items-center gap-2">
                 <iconify-icon icon="mdi:cog-box" width="32" height="32"></iconify-icon>
                 <span class="fs-4">Admin Panel</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="">
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2" aria-current="page">
+                    <a href="{{ route('root') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if(isActiveRoute('root')) active @endif " @if(isActiveRoute('root')) aria-current="page" @endif  >
                         <iconify-icon icon="material-symbols:home" width="16" height="16"></iconify-icon>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2 active">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if(isActiveRoute('admin.dashboard')) active @endif " @if(isActiveRoute('admin.dashboard')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:view-dashboard" width="16" height="16"></iconify-icon>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2">
+                    <a href="{{ route('admin.posts.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.posts.*')) active @endif " @if(isActiveRoute('admin.posts.*')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:note-text" width="16" height="16"></iconify-icon>
                         Posts
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2">
+                    <a href="{{ route('admin.comments.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                       @if (isActiveRoute('admin.comments.*')) active @endif " @if(isActiveRoute('admin.comments.*')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:comment-text-multiple" width="16" height="16"></iconify-icon>
                         Comments
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2">
+                    <a href="{{ route('admin.images.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.images.*')) active @endif " @if(isActiveRoute('admin.images.*')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:image-multiple" width="16" height="16"></iconify-icon>
                         Images
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white d-flex flex-row align-items-center gap-2">
+                    <a href="{{ route('admin.files.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.files.*')) active @endif " @if(isActiveRoute('admin.files.*')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:file-multiple" width="16" height="16"></iconify-icon>
                         File Storage
                     </a>
@@ -70,7 +76,7 @@
             <hr>
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/Smartich0ke.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <img src="{{ gravatarProfileImage(auth()->user()->email, '32') }}" alt="" width="32" height="32" class="rounded-circle me-2">
                     <strong>{{ auth()->user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">

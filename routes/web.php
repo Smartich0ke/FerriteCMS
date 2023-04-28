@@ -20,6 +20,21 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/posts/create', function () {
     return view('admin.posts.create');
 })->name('admin.posts.create');
+Route::get('/admin/posts', function () {
+    return view('admin.posts.index');
+})->name('admin.posts.index');
+
+Route::get('/admin/comments', function () {
+    return view('admin.comments.index');
+})->name('admin.comments.index');
+
+Route::get('/admin/images', function () {
+    return view('admin.images.index');
+})->name('admin.images.index');
+
+Route::get('/admin/files', function () {
+    return view('admin.files.index');
+})->name('admin.files.index');
 
 //Public Routes
 Route::get('/', function () {
