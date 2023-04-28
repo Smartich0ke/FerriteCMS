@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 //Admin Routes
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('admin.dashboard');
 Route::get('/admin/posts/create', function () {
-    return view('posts.create');
+    return view('admin.posts.create');
 })->name('admin.posts.create');
 
 //Public Routes
