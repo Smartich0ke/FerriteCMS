@@ -7,6 +7,9 @@
 import './bootstrap';
 import 'iconify-icon';
 import { createApp } from 'vue';
+import 'md-editor-v3/lib/style.css';
+import 'mavon-editor/dist/css/index.css'
+import 'prism-themes/themes/prism-nord.css'
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -16,9 +19,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
+import MarkdownEditor from './components/MarkdownEditor.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
-
+app.component('markdown-editor', MarkdownEditor);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26,7 +30,6 @@ app.component('example-component', ExampleComponent);
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
 Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
 });

@@ -15,8 +15,33 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "@milkdown-lab/plugin-split-editing": "^1.1.0",
+        "@milkdown/core": "^7.2.1",
+        "@milkdown/ctx": "^7.2.1",
+        "@milkdown/plugin-diagram": "^7.2.1",
+        "@milkdown/plugin-emoji": "^7.2.1",
+        "@milkdown/plugin-history": "^7.2.1",
+        "@milkdown/plugin-listener": "^7.2.1",
+        "@milkdown/plugin-math": "^7.2.1",
+        "@milkdown/plugin-prism": "^7.2.1",
+        "@milkdown/plugin-slash": "^7.2.1",
+        "@milkdown/plugin-tooltip": "^7.2.1",
+        "@milkdown/preset-commonmark": "^7.2.1",
+        "@milkdown/preset-gfm": "^7.2.1",
+        "@milkdown/prose": "^7.2.1",
+        "@milkdown/theme-nord": "^7.2.1",
+        "@milkdown/transformer": "^7.2.1",
+        "@milkdown/vue": "^7.2.1",
+        "@tiptap/pm": "^2.0.3",
+        "@tiptap/starter-kit": "^2.0.3",
+        "@tiptap/vue-3": "^2.0.3",
         "chart.js": "^4.2.1",
         "iconify-icon": "^1.0.7",
-        "vue-chartjs": "^5.2.0"
+        "js-cookie": "^3.0.5",
+        "mavon-editor": "^3.0.1",
+        "md-editor-v3": "^2.11.2",
+        "prism-themes": "^1.9.0",
+        "vue-chartjs": "^5.2.0",
+        "vue-cookies": "^1.8.3"
     }
 }

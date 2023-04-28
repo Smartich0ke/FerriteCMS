@@ -84,9 +84,12 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Nav buffer -->
+        <div class="navBuffer"></div>
+
         <!-- Mini Nav -->
-        <nav class="adminNav-mini">
-            <div class="d-flex flex-column flex-shrink-0 bg-dark" style="width: 4.5rem; height: 100vh;">
+            <nav class="adminNav-mini d-flex flex-column flex-shrink-0 bg-dark">
                 <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
                     <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
                     <span class="visually-hidden">Icon-only</span>
@@ -135,8 +138,7 @@
                         <li><a class="dropdown-item " href="#">Sign out</a></li>
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </nav>
         <main class="p-0 adminContentMain">
             @yield('content')
         </main>
