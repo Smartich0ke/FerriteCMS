@@ -80,8 +80,9 @@ export default defineComponent({
                 .config((ctx) => {
                     const listener = ctx.get(listenerCtx);
 
-                    listener.updated((ctx, markdown, prevMarkdown) => {
+                    listener.markdownUpdated((ctx, markdown, prevMarkdown) => {
                         if (markdown !== prevMarkdown) {
+                            console.log(markdown);
                             document.getElementById('mdOutput').innerHTML = markdown;
                         }
                     })
