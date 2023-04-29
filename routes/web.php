@@ -20,6 +20,9 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/posts/create', function () {
     return view('admin.posts.create');
 })->name('admin.posts.create');
+Route::get('/admin/posts/{slug}/edit', function () {
+    return view('admin.posts.edit');
+})->name('admin.posts.edit');
 Route::get('/admin/posts', function () {
     return view('admin.posts.index');
 })->name('admin.posts.index');
