@@ -72,6 +72,13 @@
                         File Storage
                     </a>
                 </li>
+                <li>
+                    <a href="" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('')) active @endif " @if(isActiveRoute('')) aria-current="page" @endif >
+                        <iconify-icon icon="mdi:trash" width="16" height="16"></iconify-icon>
+                        Rubbish Bin
+                    </a>
+                </li>
             </ul>
             <hr>
             <div class="dropdown">
@@ -104,33 +111,44 @@
             </a>
             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active py-3 " aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('root') }}" class="nav-link py-3
+                    @if(isActiveRoute('root')) active @endif " @if(isActiveRoute('root')) aria-current="page" @endif title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="material-symbols:home" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3 " title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link py-3 @if(isActiveRoute('admin.dashboard')) active @endif " @if(isActiveRoute('admin.dashboard')) aria-current="page" @endif title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:view-dashboard" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3 " title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('admin.posts.index') }}" class="nav-link py-3
+                     @if (isActiveRoute('admin.posts.*')) active @endif " @if(isActiveRoute('admin.posts.*')) aria-current="page" @endif title="Posts" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:note-text" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3 " title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('admin.comments.index') }}" class="nav-link py-3
+                    @if (isActiveRoute('admin.comments.*')) active @endif " @if(isActiveRoute('admin.comments.*')) aria-current="page" @endif title="comments" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:comment-text-multiple" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3 " title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('admin.images.index') }}" class="nav-link py-3
+                     @if (isActiveRoute('admin.images.*')) active @endif " @if(isActiveRoute('admin.images.*')) aria-current="page" @endif title="Images" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:image-multiple" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3 " title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="{{ route('admin.files.index') }}" class="nav-link py-3
+                     @if (isActiveRoute('admin.files.*')) active @endif " @if(isActiveRoute('admin.files.*')) aria-current="page" @endif title="Files" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:file-multiple" width="24" height="24"></iconify-icon>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link py-3
+                     @if (isActiveRoute('')) active @endif " @if(isActiveRoute('')) aria-current="page" @endif title="Rubbish Bin" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <iconify-icon icon="mdi:trash" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
             </ul>
@@ -156,5 +174,4 @@
 </div>
 @yield('post-app')
 </body>
-
 </html>
