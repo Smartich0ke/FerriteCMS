@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="m-5">
-        <a href="{{ route('posts.index') }}" class="d-flex flex-row justify-content-start link btn btn-link align-items-start text-decoration-none p-0 mb-1">
+        <a href="{{ route('admin.posts.index') }}" class="d-flex flex-row justify-content-start link btn btn-link align-items-start text-decoration-none p-0 mb-1">
             <iconify-icon icon="mdi:arrow-left" width="20" height="20"></iconify-icon>
             <h5 class=" text-decoration-none text-lg">All Posts</h5>
         </a>
