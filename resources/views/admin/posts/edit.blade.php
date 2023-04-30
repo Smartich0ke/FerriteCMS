@@ -30,7 +30,12 @@
                 <input type="file" class="form-control" id="image" name="image">
             </div>
 
-
+            <div class="form-check my-3">
+                <input class="form-check-input" type="checkbox" name="make_private" value="" id="makePrivate">
+                <label class="form-check-label" for="makePrivate">
+                    Make post private
+                </label>
+            </div>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
