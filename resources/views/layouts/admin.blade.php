@@ -73,8 +73,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="nav-link text-white d-flex flex-row align-items-center gap-2
-                    @if (isActiveRoute('')) active @endif " @if(isActiveRoute('')) aria-current="page" @endif >
+                    <a href="{{ route('admin.rubbish-bin.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.rubbish-bin.index')) active @endif " @if(isActiveRoute('admin.rubbish-bin.index')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:trash" width="16" height="16"></iconify-icon>
                         Rubbish Bin
                     </a>
