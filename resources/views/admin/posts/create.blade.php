@@ -26,10 +26,39 @@
                     <milkdowneditor-wrapper></milkdowneditor-wrapper>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Post Image</label>
-                <input type="file" class="form-control" id="image" name="image">
+
+                <div>
+                    <banner-image-cropper></banner-image-cropper>
+                </div>
             </div>
+
+            <div class="form-check my-3">
+                <input class="form-check-input" type="checkbox" name="make_private" value="" id="makePrivate">
+                <label class="form-check-label" for="makePrivate">
+                    Publish post on creation
+                </label>
+            </div>
+
             <button type="submit" class="btn btn-primary">Create Post</button>
         </form>
+
+    </div>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: fit-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crop Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <banner-image-cropper></banner-image-cropper>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
