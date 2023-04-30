@@ -39,6 +39,10 @@ Route::get('/admin/files', function () {
     return view('admin.files.index');
 })->name('admin.files.index');
 
+Route::get('/admin/rubbish-bin', function () {
+    return view('admin.rubbish_bin');
+})->name('admin.rubbish-bin.index');
+
 //Public Routes
 Route::get('/', function () {
     return view('root');
