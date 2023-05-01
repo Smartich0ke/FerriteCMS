@@ -46,6 +46,11 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    public function show($slug) {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.show', compact('post'));
+    }
+
     public function uploadBannerImage(Request $request) {
         //image is sent as a file
 

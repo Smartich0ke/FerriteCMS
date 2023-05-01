@@ -2,26 +2,13 @@
 @section('content')
 
     <article class="contentContainer">
-        <header class="d-flex flex-row justify-content-between">
-            <h1 class="text-center">Article</h1>
-            <div class="text-muted">13/02/2008</div>
+        <header class="d-flex flex-row justify-content-center p-5 align-items-center article-banner" style="background-image: url('{{ Storage::url($post->image) }}')">
+            <h1 class="text-center">{{ $post->title }}</h1>
         </header>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultricies, nunc nisl
-        aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget ultricies ultricies, nunc nisl
-        aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget ultricies ultricies, nunc nisl
-        aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget ultricies ultricies, nunc nisl
-        aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget ultricies ultricies, nunc nisl
-        <ul>
-            <li>List item</li>
-            <li>List item</li>
-            <li>List item</li>
-        </ul>
-        <strong>Bold Text</strong>
-        <br>
-        <em>Italic Text</em>
-        <br>
-        <a href="#">Link</a>
-        <hr>
+        <div class="text-muted">{{ $post->updated_at }}</div>
+        <div class="p-4">
+            <milkdown-renderer-wrapper :postbody='{{ json_encode($post->body) }}' ></milkdown-renderer-wrapper>
+        </div>
 
     </article>
 @endsection

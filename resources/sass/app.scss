@@ -22,7 +22,7 @@
     background-color: $gray-100;
     min-height: 86vh;
     box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
-    padding: 2rem;
+    //padding: 2rem;
     border-radius: 10px;
 }
 article {
@@ -191,7 +191,15 @@ p code {
     max-height: 25rem;
     overflow: scroll;
 }
-
+.article-banner {
+    height: 20rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px 10px 0 0;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
 @media screen and (max-width: 1450px) {
     .admin-nav{
         display: none !important

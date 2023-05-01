@@ -69,6 +69,8 @@ Route::get('/categories', function () {
     return view('categories.index');
 })->name('categories.index');
 
+Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
