@@ -105,7 +105,7 @@ export default defineComponent({
 
 <template>
     <Milkdown />
-    <textarea name="" id="mdOutput" cols="0" rows="0"></textarea>
+    <textarea name="body" id="mdOutput" cols="0" rows="0"></textarea>
 </template>
 
 <style scoped>

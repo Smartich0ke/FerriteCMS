@@ -28,8 +28,12 @@ export default {
     components: {
         Cropper,
     },
+    props: {
+    },
     data() {
         return {
+            postUrl: 'http://127.0.0.1:8000/admin/posts/create/banner-upload',
+            imagePath: null,
             image: {
                 src: null,
                 type: null
@@ -44,15 +48,25 @@ export default {
             const { canvas } = this.$refs.cropper.getResult();
             if (canvas) {
                 canvas.toBlob((blob) => {
-                    /*
+                    const form = new FormData();
+                    const csrf= document.querySelector('meta[name="csrf-token"]').content;
+                    form.append('_token', csrf);
                     form.append('file', blob);
                     // You can use axios, superagent and other libraries instead here
-                    fetch('http://example.com/upload/', {
+                    fetch(this.postUrl, {
                         method: 'POST',
                         body: form,
+                    }).then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Network response was not ok.');
+                    }).then((data) => {
+                        this.imagePath = data.path;
+                    }).catch((error) => {
+                        console.error(error);
                     });
-                    */
-                }, this.image.type);
+                }, 'image/webp');
             }
         },
         reset() {
@@ -111,9 +125,12 @@ export default {
 
 <template>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
-        Select Image
-    </button>
+    <div class="d-flex flex-row align-items-center">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
+            Select Image
+        </button>
+        <div class="ms-1" v-if="imagePath" >Selected image: {{ imagePath }}</div>
+    </div>
 
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -138,23 +155,23 @@ export default {
                                 <div class="text-center" >Click the "Load Image" button to select an image.</div>
                             </div>
                         </div>
-                        <div class="d-flex flex-row mt-2 " v-bind:class = "(image.src)?'justify-content-between':'justify-content-end'">
-                            <button type="button" class="btn btn-outline-danger" v-if="image.src" @click="reset()">Reset</button>
-                            <button type="button" class="button btn btn-outline-primary" v-if="!image.src" @click="$refs.filesubmit.click() ">
-                                <input type="file" ref="filesubmit" class="file-input" @change="loadImage($event)" accept="image/*">
-                                Load image
-                            </button>
-                            <button type="button" class="btn btn-outline-primary" v-if="image.src" @click="crop()">Crop</button>
-                        </div>
+
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
+                    <div class="modal-footer d-flex flex-row mt-2 " v-bind:class = "(image.src)?'justify-content-between':'justify-content-end'">
+                        <button type="button" class="btn btn-outline-danger" v-if="image.src" @click="reset()">Reset</button>
+                        <button type="button" class="button btn btn-outline-primary" v-if="!image.src" @click="$refs.filesubmit.click() ">
+                            <input type="file" ref="filesubmit" class="file-input" @change="loadImage($event)" accept="image/*">
+                            Load image
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" v-if="image.src" @click="crop()" data-bs-dismiss="modal" >Crop</button>
+                    </div>
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="image" :value="imagePath">
 </template>
 
 <style lang="scss">

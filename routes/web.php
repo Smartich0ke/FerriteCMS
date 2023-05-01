@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('admin.dashboard');
-Route::get('/admin/posts/create', function () {
-    return view('admin.posts.create');
-})->name('admin.posts.create');
+
+Route::get('/admin/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('admin.posts.create')->middleware(['auth']);
+Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 'store'])->name('admin.posts.store')->middleware(['auth']);
+Route::post('/admin/posts/create/banner-upload', [App\Http\Controllers\PostController::class, 'uploadBannerImage'])->name('admin.posts.upload-banner-image')->middleware(['auth']);
+
 Route::get('/admin/posts/{slug}/edit', function () {
     return view('admin.posts.edit');
 })->name('admin.posts.edit');
@@ -57,9 +59,7 @@ Route::get('/gallery', function () {
 Route::get('/posts', function () {
     return view('posts.index');
 })->name('posts.index');
-Route::get('/posts/{slug}', function () {
-    return view('posts.show');
-})->name('posts.show');
+
 
 Route::get('/tags', function () {
     return view('tags.index');
