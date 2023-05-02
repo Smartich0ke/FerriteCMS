@@ -146,7 +146,7 @@ export default {
                             class="cropper"
                             v-if="image.src"
                             :src="image.src"
-                            :stencil-props="{aspectRatio: 16/4}"
+                            :stencil-props="{aspectRatio: 3/1}"
                             @change="change"
                         />
                         <div class="no-image" v-if="!image.src">
