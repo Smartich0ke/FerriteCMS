@@ -24,7 +24,7 @@
     "autoload": {
         "files": [
             "app/Helpers/RouteHelpers.php",
-            "app/Helpers/GravatarHelper.php"
+            "app/Helpers/ViewHelpers.php"
         ],
         "psr-4": {
             "App\\": "app/",
