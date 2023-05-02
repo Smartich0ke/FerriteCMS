@@ -25,6 +25,8 @@ class PostController extends Controller
             'excerpt' => 'required',
 //            'category' => 'required',
 //          'tags' => 'required',
+            'image' => 'required',
+            'banner_colour' => 'required',
             'body' => 'required|min:10',
         ]);
 
@@ -33,6 +35,7 @@ class PostController extends Controller
         $post->excerpt = $request->excerpt;
 //        $post->category = $request->category;
 //      $post->tags = $request->tags;
+        $post->banner_colour = $request->banner_colour;
         $post->image = $request->image;
         $post->body = $request->body;
         $post->slug = Str::of($request->title)->slug('-');

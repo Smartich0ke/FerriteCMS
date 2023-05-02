@@ -40,6 +40,12 @@
                     <banner-image-cropper ></banner-image-cropper>
             </div>
 
+            <div class="mb-3">
+                <label for="banner_colour" class="form-label">Banner Colour</label>
+                <input type="color" class="form-control @error('banner_colour') is-invalid @enderror " style="width: 5rem;" id="banner_colour" name="banner_colour" placeholder="Post Title">
+                @error('banner_colour') <div class="text-danger">{{ $message }}</div> @enderror
+            </div>
+
             <div class="form-check my-3">
                 <input class="form-check-input" type="checkbox" name="make_private" value="" id="makePrivate">
                 <label class="form-check-label" for="makePrivate">

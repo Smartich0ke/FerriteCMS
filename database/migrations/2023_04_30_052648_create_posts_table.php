@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->boolean('private')->default(true);
+            $table->string('banner_colour')->nullable()->default('#dee2e6');
             $table->timestamps();
         });
     }
