@@ -8,7 +8,7 @@
         </header>
 
         <div class="p-5">
-            <div class="text-muted">Last update: {{ formatPostDateAndTime($post->updated_at) }}</div>
+            <div class="text-muted">Last updated: {{ formatPostDateAndTime($post->updated_at) }}</div>
             <milkdown-renderer-wrapper :postbody='{{ json_encode($post->body) }}' ></milkdown-renderer-wrapper>
         </div>
 
