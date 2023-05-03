@@ -12,10 +12,10 @@
             <div class="dropdown d-flex flex-row gap-2">
                 <form action="{{ route('posts.index') }}" method="GET">
                     <select name="filter" id="filterSelect" class="form-select d-inline-block" style="width: fit-content;">
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
-                        <option value="alphabetical">A-Z</option>
-                        <option value="reverse-alphabetical">Z-A</option>
+                        <option value="newest" @if($filter == 'newest') selected @endif>Newest</option>
+                        <option value="oldest" @if($filter == 'oldest') selected @endif>Oldest</option>
+                        <option value="alphabetical" @if($filter == 'alphabetical') selected @endif>A-Z</option>
+                        <option value="reverse-alphabetical" @if($filter == 'reverse-alphabetical') selected @endif>Z-A</option>
                     </select>
                 </form>
             </div>
