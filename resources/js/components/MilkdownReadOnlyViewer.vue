@@ -53,6 +53,7 @@ export default defineComponent({
         return {};
     },
     setup: (props) => {
+        const editable = false;
         onMounted(() => {
             const milkdownEditor = document.querySelector('.milkdown');
             if (milkdownEditor) {
@@ -65,9 +66,9 @@ export default defineComponent({
                 .config((ctx) => {
                     ctx.set(rootCtx, root);
                     ctx.set(defaultValueCtx, props.postbody);
-                    ctx.set(editorViewOptionsCtx, (prev) => ({
+                    ctx.update(editorViewOptionsCtx, (prev) => ({
                         ...prev,
-                        editable: false,
+                        editable: () => editable,
                     }))
                     ctx.set(prismConfig.key, {
                         configureRefractor: (refractor) => {
@@ -123,12 +124,17 @@ export default defineComponent({
     <textarea name="body" id="mdOutput" cols="0" rows="0"></textarea>
 </template>
 
-<style scoped>
+<style>
 .milkdown .split-editor p {
     font-size: 1rem !important;
 }
 #mdOutput {
     display: none;
+}
+.ProseMirror {
+    border: none !important;
+    padding: 0 !important;
+    resize: none !important;
 }
 
 </style>
