@@ -54,7 +54,7 @@
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Articles
                             </a>
-                            <ul class="dropdown-menu bg-light" style="border: none;" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu nav-drop"  aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('posts.index') }}">All Articles</a></li>
                                 <li><a class="dropdown-item" href="{{ route('tags.index') }}">Tags</a></li>
                                 <li><a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a></li>
