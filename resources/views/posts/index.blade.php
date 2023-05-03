@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="contentContainer">
         <header class="d-flex flex-row justify-content-center">
             <h1 class="text-center">All Articles</h1>
@@ -36,13 +35,14 @@
                 </div>
                 <hr class="mt-1 mb-3">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies
-                    ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod, nisl eget
-                    ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec euismod,
-                    nisl eget ultricies ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nunc vitae nisl. Donec
+                    {{ $post->excerpt }}
                 </p>
             </article>
         @endforeach
+
+        <div class="d-flex flex-row justify-content-center">
+            {{ $posts->links() }}
+        </div>
 
     </div>
 @endsection
