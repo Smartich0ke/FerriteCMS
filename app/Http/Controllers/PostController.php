@@ -11,6 +11,7 @@ class PostController extends Controller
 {
     public function index(Request $request) {
         //If a get query for "filter" is set, sort by newest, oldest, a-z, z-a
+        $filter = null;
         if ($request->query('filter')) {
             $filter = $request->query('filter');
             if ($filter == 'newest') {
@@ -22,13 +23,35 @@ class PostController extends Controller
             } elseif ($filter == 'reverse-alphabetical') {
                 $posts = Post::where('private', false)->orderBy('title', 'desc')->paginate(5);
             } else {
-                $posts = Post::where('private', false)->paginate(5);
+                $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
             }
         } else {
             $posts = Post::where('private', false)->paginate(5);
         }
         return view('posts.index', compact('posts', 'filter'));
     }
+
+    public function adminIndex() {
+        $posts = Post::paginate('5')->sortBy(['created_at', 'desc']);
+        return view('admin.posts.index', [
+            'posts' => $posts,
+        ]);
+    }
+
+    public function makePrivate($id) {
+        $post = Post::findOrFail($id);
+        $post->private = true;
+        $post->save();
+        return redirect()->route('admin.posts.index');
+    }
+
+    public function makePublic($id) {
+        $post = Post::findOrFail($id);
+        $post->private = false;
+        $post->save();
+        return redirect()->route('admin.posts.index');
+    }
+
     public function create()
     {
         return view('admin.posts.create');
@@ -51,6 +74,7 @@ class PostController extends Controller
         $post->excerpt = $request->excerpt;
 //        $post->category = $request->category;
 //      $post->tags = $request->tags;
+        $post->user()->associate(auth()->user());
         $post->banner_colour = $request->banner_colour;
         $post->image = $request->image;
         $post->body = $request->body;
@@ -66,7 +90,7 @@ class PostController extends Controller
     }
 
     public function show($slug) {
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('slug', $slug)->get()->firstOrFail();
         return view('posts.show', compact('post'));
     }
 

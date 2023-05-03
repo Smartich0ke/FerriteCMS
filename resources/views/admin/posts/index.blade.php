@@ -19,34 +19,32 @@
               </tr>
               </thead>
               <tbody>
-              <tr class="my-5">
-                  <th scope="row">Post Title</th>
-                  <td>post-title</td>
-                  <td>Author Name</td>
-                  <td>100</td>
-                  <td>50</td>
-                  <td>2021-01-01</td>
-                  <td>2021-01-01</td>
-                  <td>
-                      <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
-                      <button class="btn btn-sm btn-outline-warning me-2">Make Private</button>
-                      <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
-                  </td>
-              </tr>
-              <tr class="my-5">
-                  <th scope="row">Post Title</th>
-                  <td>post-title</td>
-                  <td>Author Name</td>
-                  <td>100</td>
-                  <td>50</td>
-                  <td>2021-01-01</td>
-                  <td>2021-01-01</td>
-                  <td>
-                      <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
-                      <button class="btn btn-sm btn-outline-success me-2">Make Public</button>
-                      <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
-                  </td>
-              </tr>
+                @foreach($posts as $post)
+                    <tr class="my-5">
+                        <th scope="row"><a class="text-dark" href="{{ postURL($post) }}">{{ $post->title }}</a></th>
+                        <td>{{ $post->slug }}</td>
+                        <td>{{ $post->user->name }}</td>
+                        <td>100</td>
+                        <td>50</td>
+                        <td>{{ formatShortDate($post->created_at) }}</td>
+                        <td>{{ formatShortDate($post->updated_at) }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
+                            @if($post->private)
+                                <form class="d-inline me-2" action="{{ route('admin.posts.publish', $post) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-success">Make Public</button>
+                                </form>
+                            @else
+                                <form class="d-inline me-2" action="{{ route('admin.posts.private', $post) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-sm btn-outline-warning">Make Private</button>
+                                </form>
+                            @endif
+                            <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
+                        </td>
+                    </tr>
+                @endforeach
               </tbody>
           </table>
       </div>
