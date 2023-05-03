@@ -17,9 +17,9 @@ class PostController extends Controller
                 $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
             } elseif ($filter == 'oldest') {
                 $posts = Post::where('private', false)->orderBy('created_at', 'asc')->paginate(5);
-            } elseif ($filter == 'a-z') {
+            } elseif ($filter == 'alphabetical') {
                 $posts = Post::where('private', false)->orderBy('title', 'asc')->paginate(5);
-            } elseif ($filter == 'z-a') {
+            } elseif ($filter == 'reverse-alphabetical') {
                 $posts = Post::where('private', false)->orderBy('title', 'desc')->paginate(5);
             } else {
                 $posts = Post::where('private', false)->paginate(5);
@@ -27,7 +27,7 @@ class PostController extends Controller
         } else {
             $posts = Post::where('private', false)->paginate(5);
         }
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'filter'));
     }
     public function create()
     {
