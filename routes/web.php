@@ -21,6 +21,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('admin.posts.create')->middleware(['auth']);
 Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 'store'])->name('admin.posts.store')->middleware(['auth']);
 Route::post('/admin/posts/create/banner-upload', [App\Http\Controllers\PostController::class, 'uploadBannerImage'])->name('admin.posts.upload-banner-image')->middleware(['auth']);
+Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 
 Route::get('/admin/posts/{slug}/edit', function () {
     return view('admin.posts.edit');
@@ -55,11 +56,6 @@ Route::get('/about', function () {
 Route::get('/gallery', function () {
     return view('gallery.index');
 })->name('gallery.index');
-
-Route::get('/posts', function () {
-    return view('posts.index');
-})->name('posts.index');
-
 
 Route::get('/tags', function () {
     return view('tags.index');

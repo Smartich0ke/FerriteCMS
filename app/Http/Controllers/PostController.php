@@ -9,9 +9,25 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    public function index()
-    {
-        return view('posts.index');
+    public function index(Request $request) {
+        //If a get query for "filter" is set, sort by newest, oldest, a-z, z-a
+        if ($request->query('filter')) {
+            $filter = $request->query('filter');
+            if ($filter == 'newest') {
+                $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
+            } elseif ($filter == 'oldest') {
+                $posts = Post::where('private', false)->orderBy('created_at', 'asc')->paginate(5);
+            } elseif ($filter == 'a-z') {
+                $posts = Post::where('private', false)->orderBy('title', 'asc')->paginate(5);
+            } elseif ($filter == 'z-a') {
+                $posts = Post::where('private', false)->orderBy('title', 'desc')->paginate(5);
+            } else {
+                $posts = Post::where('private', false)->paginate(5);
+            }
+        } else {
+            $posts = Post::where('private', false)->paginate(5);
+        }
+        return view('posts.index', compact('posts'));
     }
     public function create()
     {

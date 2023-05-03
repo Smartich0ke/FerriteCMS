@@ -11,3 +11,7 @@ function formatPostDateAndTime($date)
 {
     return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d M Y, g:ia');
 }
+function formatShortDate($date)
+{
+    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/y');
+}
