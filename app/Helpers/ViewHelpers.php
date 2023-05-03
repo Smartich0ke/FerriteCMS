@@ -7,3 +7,7 @@ function gravatarProfileImage($email, $size = 80)
 
     return $url;
 }
+function formatPostDateAndTime($date)
+{
+    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d M Y, g:ia');
+}
