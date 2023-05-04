@@ -16,15 +16,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="my-5">
-                    <th scope="row">1234</th>
-                    <td>Some Name</td>
-                    <td>Some description</td>
-                    <td>2021-01-01</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
-                    </td>
-                </tr>
+                    @foreach($categories as $category)
+                        <tr class="my-5">
+                            <th scope="row">{{ $category->id }}</th>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->description }}</td>
+                            <td>{{ formatShortDate($category->created_at) }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
