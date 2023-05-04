@@ -23,6 +23,7 @@ Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 
 Route::post('/admin/posts/create/banner-upload', [App\Http\Controllers\PostController::class, 'uploadBannerImage'])->name('admin.posts.upload-banner-image')->middleware(['auth']);
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('/admin/posts', [App\Http\Controllers\PostController::class, 'adminIndex'])->name('admin.posts.index');
+Route::get('/admin/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('admin.categories.index');
 Route::post('/admin/posts/{id}/private', [App\Http\Controllers\PostController::class, 'makePrivate'])->name('admin.posts.private')->middleware(['auth']);
 Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::class, 'makePublic'])->name('admin.posts.publish')->middleware(['auth']);
 Route::get('/admin/posts/{slug}/edit', function () {
