@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -20,11 +21,12 @@ class CategoryController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|unique:categories|max:50',
-            'slug' => 'required|unique:categories|max:150',
+            'description' => 'required|unique:categories|max:150',
         ]);
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = $request->slug;
+        $category->slug = Str::of($request->name)->slug('-');
+        $category->description = $request->description;
 
         $category->save();
 
