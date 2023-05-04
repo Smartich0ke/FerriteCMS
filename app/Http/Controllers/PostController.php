@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -54,7 +55,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create' , compact('categories'));
     }
 
     public function store(Request $request)
@@ -72,7 +74,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->excerpt = $request->excerpt;
-//        $post->category = $request->category;
+        $post->category()->associate($request->category);
 //      $post->tags = $request->tags;
         $post->user()->associate(auth()->user());
         $post->banner_colour = $request->banner_colour;

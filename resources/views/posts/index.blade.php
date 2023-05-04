@@ -27,7 +27,7 @@
                     <div>{{ formatShortDate($post->updated_at) }}</div>
                 </div>
                 <div class="d-flex flex-row justify-content-start gap-2 flex-wrap">
-                    <div class="text-sm text-muted">In: <a class="link lightLink" href="http://">Category</a></div>
+                    <div class="text-sm text-muted">In: <a class="link lightLink" href="">{{ $post->category->name }}</a></div>
                     <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
                         <a class="link lightLink" href="http://">another-tag</a>,
                         <a class="link lightLink" href="http://">other-tag</a>,

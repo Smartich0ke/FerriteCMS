@@ -18,8 +18,9 @@
                 <label for="category" class="form-label">Post Category</label>
                 <select class="form-select @error('category') is-invalid @enderror " id="category" name="category">
                     <option selected disabled>Select Category</option>
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
                 @error('category') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
@@ -42,7 +43,7 @@
 
             <div class="mb-3">
                 <label for="banner_colour" class="form-label">Banner Colour</label>
-                <input type="color" class="form-control @error('banner_colour') is-invalid @enderror " style="width: 5rem;" id="banner_colour" name="banner_colour" placeholder="Post Title">
+                <input type="color" class="form-control @error('banner_colour') is-invalid @enderror " style="width: 5rem;" id="banner_colour" value="#dee2e6" name="banner_colour" placeholder="Post Title">
                 @error('banner_colour') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
