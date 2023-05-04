@@ -27,6 +27,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = Str::of($request->name)->slug('-');
         $category->description = $request->description;
+        $category->image = $request->image;
 
         $category->save();
 

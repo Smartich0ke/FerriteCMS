@@ -9,14 +9,20 @@
         <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="title" class="form-label">Category Name</label>
+                <label for="name" class="form-label">Category Name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror " id="name" name="name" placeholder="Category Name">
-                @error('title') <div class="text-danger">{{ $message }}</div> @enderror
+                @error('name') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
                 <label for="title" class="form-label">Category Description</label>
                 <textarea class="form-control @error('description') is-invalid @enderror " id="description" name="description" rows="3"></textarea>
-                @error('excerpt') <div class="text-danger">{{ $message }}</div> @enderror
+                @error('description') <div class="text-danger">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="mb-3">
+                <div for="banner_image" class="form-label">Banner Image</div>
+                @error('banner_image') <div class="text-danger">{{ $message }}</div> @enderror
+                <banner-image-cropper ></banner-image-cropper>
             </div>
 
             <button type="submit" class="btn btn-primary">Create Category</button>
