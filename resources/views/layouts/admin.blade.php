@@ -52,6 +52,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.categories.*')) active @endif " @if(isActiveRoute('admin.categories.*')) aria-current="page" @endif >
+                        <iconify-icon icon="mdi:shape" width="16" height="16"></iconify-icon>
+                        Categories
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.comments.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
                        @if (isActiveRoute('admin.comments.*')) active @endif " @if(isActiveRoute('admin.comments.*')) aria-current="page" @endif >
                         <iconify-icon icon="mdi:comment-text-multiple" width="16" height="16"></iconify-icon>
