@@ -25,6 +25,9 @@
                 @error('category') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
+                <new-tags-input :input-name='"tags"' item-type="post"></new-tags-input>
+            </div>
+            <div class="mb-3">
                 <label for="title" class="form-label">Post Excerpt</label>
                 <textarea class="form-control @error('excerpt') is-invalid @enderror " id="excerpt" name="excerpt" rows="3"></textarea>
                 @error('excerpt') <div class="text-danger">{{ $message }}</div> @enderror

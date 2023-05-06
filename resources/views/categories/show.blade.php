@@ -2,14 +2,14 @@
 @section('content')
     <div class="contentContainer">
         <header class="d-flex flex-row justify-content-center">
-            <h1 class="text-center">All Articles</h1>
+            <h1 class="text-center">Articles in category "{{ $category->name }}"</h1>
         </header>
 
 
         <section>
             <!-- Sort-by dropdown -->
             <div class="dropdown d-flex flex-row gap-2">
-                <form action="{{ route('posts.index') }}" method="GET">
+                <form action="{{ route('categories.show', $category->slug ) }}" method="GET">
                     <input type="hidden" name="page" value="{{ $request->page }}" >
                     <select name="filter" id="filterSelect" class="form-select d-inline-block" style="width: fit-content;">
                         <option value="newest" @if($filter == 'newest') selected @endif>Newest</option>
@@ -29,10 +29,9 @@
                 </div>
                 <div class="d-flex flex-row justify-content-start gap-2 flex-wrap">
                     <div class="text-sm text-muted">In: <a class="link lightLink" href="">{{ $post->category->name }}</a></div>
-                    <div class="text-sm text-muted">Tags:
-                        @foreach($post->tags as $tag)
-                                <a class="link lightLink" href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a> @if(!$loop->last),@endif
-                        @endforeach
+                    <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
+                        <a class="link lightLink" href="http://">another-tag</a>,
+                        <a class="link lightLink" href="http://">other-tag</a>,
                     </div>
                 </div>
                 <hr class="mt-1 mb-3">

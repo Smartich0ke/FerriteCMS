@@ -2,11 +2,10 @@
 @section('content')
     <div class="contentContainer">
         <header class="d-flex flex-row justify-content-center">
-            <h1 class="text-center">Article Tags</h1>
+            <h1 class="text-center">All Tags</h1>
         </header>
-        <div class="my-3" ><a href="" class="btn btn-outline-dark">tag<span class="text-muted"> (3)</span></a></div>
-        <div class="my-3" ><a href="" class="btn btn-outline-dark">another-tag<span class="text-muted"> (33)</span></a></div>
-        <div class="my-3" ><a href="" class="btn btn-outline-dark">other-tag<span class="text-muted"> (15)</span></a></div>
-        <div class="my-3" ><a href="" class="btn btn-outline-dark">one-more-tag<span class="text-muted"> (5)</span></a></div>
+        @foreach($tags as $tag)
+            <div class="my-3" ><a href="{{ route('tags.show', $tag->name) }}" class="btn btn-outline-dark">{{ $tag->name }}</a></div>
+        @endforeach
     </div>
 @endsection

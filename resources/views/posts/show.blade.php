@@ -11,9 +11,10 @@
             <div class="text-muted">Last updated: {{ formatPostDateAndTime($post->updated_at) }}</div>
             <div class="d-flex flex-row gap-2">
                 <div class="text-sm text-muted">In: <a class="link lightLink" href="">{{ $post->category->name }}</a></div>
-                <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
-                    <a class="link lightLink" href="http://">another-tag</a>,
-                    <a class="link lightLink" href="http://">other-tag</a>,
+                <div class="text-sm text-muted">Tags:
+                    @foreach($post->tags as $tag)
+                        <a class="link lightLink" href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a> @if(!$loop->last),@endif
+                    @endforeach
                 </div>
             </div>
             <milkdown-renderer-wrapper :postbody='{{ json_encode($post->body) }}' ></milkdown-renderer-wrapper>

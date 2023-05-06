@@ -27,9 +27,9 @@ class PostController extends Controller
                 $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
             }
         } else {
-            $posts = Post::where('private', false)->paginate(5);
+            $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
         }
-        return view('posts.index', compact('posts', 'filter'));
+        return view('posts.index', compact('posts', 'filter', 'request'));
     }
 
     public function adminIndex() {
@@ -86,7 +86,10 @@ class PostController extends Controller
         } else {
             $post->private = false;
         }
+
         $post->save();
+
+        $post->attachTags($request->tags);
 
         return redirect()->route('posts.index');
     }

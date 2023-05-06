@@ -23,11 +23,15 @@ Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 
 Route::post('/admin/posts/create/banner-upload', [App\Http\Controllers\PostController::class, 'uploadBannerImage'])->name('admin.posts.upload-banner-image')->middleware(['auth']);
 Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('/admin/posts', [App\Http\Controllers\PostController::class, 'adminIndex'])->name('admin.posts.index');
-Route::get('/admin/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('admin.categories.index');
+Route::get('/admin/categories', [App\Http\Controllers\CategoryController::class, 'adminIndex'])->name('admin.categories.index');
+Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
+Route::get('categories/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 Route::get('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.categories.create');
 Route::post('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.categories.store');
 Route::post('/admin/posts/{id}/private', [App\Http\Controllers\PostController::class, 'makePrivate'])->name('admin.posts.private')->middleware(['auth']);
 Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::class, 'makePublic'])->name('admin.posts.publish')->middleware(['auth']);
+Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
+Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
 Route::get('/admin/posts/{slug}/edit', function () {
     return view('admin.posts.edit');
 })->name('admin.posts.edit');
@@ -59,14 +63,6 @@ Route::get('/about', function () {
 Route::get('/gallery', function () {
     return view('gallery.index');
 })->name('gallery.index');
-
-Route::get('/tags', function () {
-    return view('tags.index');
-})->name('tags.index');
-
-Route::get('/categories', function () {
-    return view('categories.index');
-})->name('categories.index');
 
 Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
