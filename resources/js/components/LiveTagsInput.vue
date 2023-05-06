@@ -4,15 +4,17 @@
       <span
           v-for="(tag, index) in tags"
           :key="index"
-          class="badge bg-secondary me-1 mt-1"
+          class="badge bg-secondary me-1 mt-1 d-inline-flex flex-row align-items-center justify-content-center tag-badge"
       >
         {{ tag }}
         <button
             @click="removeTag(index)"
-            class="btn-close ms-2"
+            class="ms-2 remove-button"
             type="button"
             aria-label="Remove tag"
-        ></button>
+        >
+            <iconify-icon class="d-flex flex-row justify-content-center align-items-center" width="20" height="20" style="color: white;" icon="mdi:close-circle-outline"></iconify-icon>
+        </button>
       </span>
         </div>
         <input
@@ -79,3 +81,14 @@ export default {
     },
 };
 </script>
+
+<style>
+.remove-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+.tag-badge {
+    font-size: 0.8rem;
+}
+</style>
