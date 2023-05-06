@@ -28,10 +28,11 @@
                     <div>{{ formatShortDate($post->updated_at) }}</div>
                 </div>
                 <div class="d-flex flex-row justify-content-start gap-2 flex-wrap">
-                    <div class="text-sm text-muted">In: <a class="link lightLink" href="">{{ $post->category->name }}</a></div>
-                    <div class="text-sm text-muted">Tags: <a class="link lightLink" href="">tag</a>,
-                        <a class="link lightLink" href="http://">another-tag</a>,
-                        <a class="link lightLink" href="http://">other-tag</a>,
+                    <div class="text-sm text-muted">In: <a class="link lightLink" href="{{ route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a></div>
+                    <div class="text-sm text-muted">Tags:
+                        @foreach($post->tags as $tag)
+                            <a class="link lightLink" href="{{ route('tags.show', $tag->name) }}">{{ $tag->name }}</a> @if(!$loop->last),@endif
+                        @endforeach
                     </div>
                 </div>
                 <hr class="mt-1 mb-3">
