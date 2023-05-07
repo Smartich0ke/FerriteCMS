@@ -42,16 +42,23 @@ export default defineComponent({
     components: {
         Milkdown,
     },
+    props: {
+        postbody: {
+            type: String,
+            required: false,
+            default: ''
+        },
+    },
     data() {
         return {};
     },
-    setup: () => {
+    setup: (props) => {
         useEditor((root) => {
             return Editor.make()
                 .config(nord)
                 .config((ctx) => {
                     ctx.set(rootCtx, root);
-                    ctx.set(defaultValueCtx, '');
+                    ctx.set(defaultValueCtx, props.postbody);
                     ctx.set(prismConfig.key, {
                         configureRefractor: (refractor) => {
                             refractor.register(sass)
@@ -100,11 +107,10 @@ export default defineComponent({
         });
     },
 });
-
 </script>
 
 <template>
-    <Milkdown />
+    <Milkdown class="editor" />
     <textarea name="body" id="mdOutput" cols="0" rows="0"></textarea>
 </template>
 
@@ -114,6 +120,13 @@ export default defineComponent({
 }
 #mdOutput {
     display: none;
+}
+.editor :deep(.ProseMirror)  {
+    border: 1px solid #dee2e6;
+    resize: vertical;
+    overflow: scroll;
+    font-size: 1rem;
+    max-height: 25rem;
 }
 
 </style>

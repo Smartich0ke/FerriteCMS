@@ -17,6 +17,9 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
+                compilerOptions: {
+                    isCustomElement: (tag) => /^iconify-icon/.test(tag),
+                },
             },
         }),
     ],

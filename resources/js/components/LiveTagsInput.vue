@@ -34,7 +34,7 @@ import axios from "axios";
 export default {
     props: {
         itemId: {
-            type: Number,
+            type: String,
             required: true,
         },
     },

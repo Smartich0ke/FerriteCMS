@@ -29,7 +29,7 @@
                         <td>{{ formatShortDate($post->created_at) }}</td>
                         <td>{{ formatShortDate($post->updated_at) }}</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
+                            <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
                             @if($post->private)
                                 <form class="d-inline me-2" action="{{ route('admin.posts.publish', $post) }}" method="POST">
                                     @csrf

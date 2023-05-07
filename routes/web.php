@@ -32,9 +32,7 @@ Route::post('/admin/posts/{id}/private', [App\Http\Controllers\PostController::c
 Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::class, 'makePublic'])->name('admin.posts.publish')->middleware(['auth']);
 Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
 Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
-Route::get('/admin/posts/{slug}/edit', function () {
-    return view('admin.posts.edit');
-})->name('admin.posts.edit');
+Route::get('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('admin.posts.edit');
 
 
 Route::get('/admin/comments', function () {

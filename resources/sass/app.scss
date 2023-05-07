@@ -167,9 +167,6 @@ strong {
     @extend .my-2;
     @extend .px-2;
     @extend .py-1;
-    border: 1px solid $gray-300;
-    resize: vertical;
-    overflow: scroll;
     //text-wrap: normal;
 }
 

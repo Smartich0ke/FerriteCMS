@@ -120,21 +120,21 @@ export default defineComponent({
 </script>
 
 <template>
-    <Milkdown />
+    <Milkdown class="renderer" />
     <textarea name="body" id="mdOutput" cols="0" rows="0"></textarea>
 </template>
 
-<style>
+<style scoped>
 .milkdown .split-editor p {
     font-size: 1rem !important;
 }
 #mdOutput {
     display: none;
 }
-.ProseMirror {
-    border: none !important;
-    padding: 0 !important;
-    resize: none !important;
+.renderer :deep(.ProseMirror)  {
+    border: none ;
+    padding: 0;
+    resize: none;
 }
 
 </style>

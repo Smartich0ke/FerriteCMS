@@ -25,6 +25,7 @@
                 @error('category') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
+                <label for="">Tags</label>
                 <new-tags-input :input-name='"tags"' item-type="post"></new-tags-input>
             </div>
             <div class="mb-3">

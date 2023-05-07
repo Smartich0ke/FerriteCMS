@@ -59,6 +59,12 @@ class PostController extends Controller
         return view('admin.posts.create' , compact('categories'));
     }
 
+    public function edit($slug) {
+        $post = Post::where('slug', $slug)->get()->firstOrFail();
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
