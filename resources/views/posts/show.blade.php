@@ -20,5 +20,10 @@
             <milkdown-renderer-wrapper :postbody='{{ json_encode($post->body) }}' ></milkdown-renderer-wrapper>
         </div>
 
+        <div>
+            <h3>Comments</h3>
+            <comment-list post-id="{{ $post->id }}" post-slug="{{ $post->slug }}" ></comment-list>
+        </div>
+
     </article>
 @endsection

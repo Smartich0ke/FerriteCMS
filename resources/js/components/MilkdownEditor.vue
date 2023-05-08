@@ -89,7 +89,6 @@ export default defineComponent({
 
                     listener.markdownUpdated((ctx, markdown, prevMarkdown) => {
                         if (markdown !== prevMarkdown) {
-                            console.log(markdown);
                             document.getElementById('mdOutput').innerHTML = markdown;
                         }
                     })

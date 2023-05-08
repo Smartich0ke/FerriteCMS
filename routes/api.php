@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostTagsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,8 @@ Route::middleware(['api'])->group(function () {
     Route::delete('/posts/{postId}/tags', [postTagsController::class, 'destroy']);
     Route::get('/posts/{postId}/tags', [postTagsController::class, 'index']);
 });
+
+
+Route::get('/posts/{slug}/comments', [CommentController::class, 'index']);
+Route::post('/comments', [CommentController::class, 'store']);
+Route::post('/comments/{id}/like', [CommentController::class, 'like']);

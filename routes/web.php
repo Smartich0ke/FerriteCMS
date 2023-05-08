@@ -28,12 +28,13 @@ Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'inde
 Route::get('categories/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 Route::get('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.categories.create');
 Route::post('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('admin.posts.edit');
+Route::post('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'update'])->name('admin.posts.update');
 Route::post('/admin/posts/{id}/private', [App\Http\Controllers\PostController::class, 'makePrivate'])->name('admin.posts.private')->middleware(['auth']);
 Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::class, 'makePublic'])->name('admin.posts.publish')->middleware(['auth']);
+Route::post('comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
 Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
-Route::get('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('admin.posts.edit');
-
 
 Route::get('/admin/comments', function () {
     return view('admin.comments.index');

@@ -2,13 +2,14 @@
 @section('content')
 
     <div class="m-5">
-        <a href="{{ route('admin.posts.update') }}" class="d-flex flex-row justify-content-start link btn btn-link align-items-start text-decoration-none p-0 mb-1">
+        <a href="{{ route('admin.posts.index') }}" class="d-flex flex-row justify-content-start link btn btn-link align-items-start text-decoration-none p-0 mb-1">
             <iconify-icon icon="mdi:arrow-left" width="20" height="20"></iconify-icon>
             <h5 class=" text-decoration-none text-lg">All Posts</h5>
         </a>
         <h1>Edit Post "{{ $post->title }}"</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.posts.update', $post->slug) }}" method="POST" >
             @csrf
+            @method('POST')
             <div class="mb-3">
                 <label for="title" class="form-label">Post Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror " id="title" name="title" value="{{ $post->title }}" placeholder="Post Title">
@@ -30,7 +31,7 @@
             </div>
             <div class="mb-3">
                 <label for="title" class="form-label">Post Excerpt</label>
-                <textarea class="form-control @error('excerpt') is-invalid @enderror " id="excerpt" name="excerpt" rows="3"></textarea>
+                <textarea class="form-control @error('excerpt') is-invalid @enderror " id="excerpt" name="excerpt" rows="3">{{ $post->excerpt }}</textarea>
                 @error('excerpt') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
@@ -58,8 +59,16 @@
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
 
     </div>
+@endsection
+@section('post-app')
+
+<script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById('mdOutput').innerHTML = `{{ $post->body }}`;
+    });
+</script>
 @endsection

@@ -33,7 +33,7 @@ class PostController extends Controller
     }
 
     public function adminIndex() {
-        $posts = Post::paginate('5')->sortBy(['created_at', 'desc']);
+        $posts = Post::paginate('20')->sortBy(['created_at', 'desc']);
         return view('admin.posts.index', [
             'posts' => $posts,
         ]);
@@ -57,6 +57,39 @@ class PostController extends Controller
     {
         $categories = Category::all();
         return view('admin.posts.create' , compact('categories'));
+    }
+
+    public function update(Request $request, $slug) {
+
+        $post = Post::where('slug', $slug)->get()->firstOrFail();
+        $request->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'category' => 'required',
+//          'tags' => 'required',
+            'image' => 'nullable',
+            'banner_colour' => 'required',
+            'body' => 'required|min:10',
+        ]);
+
+        $post->title = $request->title;
+        $post->excerpt = $request->excerpt;
+        $post->category()->associate($request->category);
+//      $post->tags = $request->tags;
+        $post->banner_colour = $request->banner_colour;
+        $post->body = $request->body;
+        $post->slug = Str::of($request->title)->slug('-');
+        if ($request->make_private == 'on') {
+            $post->private = true;
+        } else {
+            $post->private = false;
+        }
+        if ($request->image) {
+            $post->image = $request->image;
+        }
+        $post->save();
+
+        return redirect()->route('admin.posts.index');
     }
 
     public function edit($slug) {
