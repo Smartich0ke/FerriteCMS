@@ -2,7 +2,7 @@
 @section('content')
     <div class="m-5">
         <h1>All Images</h1>
-
+        <a href="{{ route('images.create') }}" class="btn btn-primary">New Image</a>
         <div class="">
             <table class="table table-responsive">
                 <thead>

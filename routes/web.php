@@ -35,6 +35,7 @@ Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::c
 Route::post('comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
 Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
+Route::get('/images/create', [App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
 
 Route::get('/admin/comments', function () {
     return view('admin.comments.index');
