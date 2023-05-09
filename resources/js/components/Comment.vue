@@ -13,15 +13,15 @@
         </div>
         <div v-if="replies.length > 0">
             <div v-for="(reply, index) in replies" :key="index">
-                <AsyncComment :comment="reply" :postId="postId" :postSlug="postSlug" />
+                <Comment :comment="reply" :postId="postId" :postSlug="postSlug" />
             </div>
         </div>
+
 
     </div>
 </template>
 
 <script>
-import CommentList from './CommentList.vue';
 import axios from 'axios';
 import md5 from 'md5';
 import CommentForm from "./CommentForm.vue";
@@ -29,7 +29,6 @@ import CommentForm from "./CommentForm.vue";
 export default {
     components: {
         CommentForm,
-        CommentList,
     },
     props: {
         comment: Object,
@@ -77,7 +76,7 @@ export default {
     async mounted() {
         if (!this.comment.replies) {
             try {
-                const response = await axios.get(`/api/posts/${this.postId}/comments`, {
+                const response = await axios.get(`/api/posts/${this.postSlug}/comments`, {
                     params: {
                         parent_id: this.comment.id,
                     },

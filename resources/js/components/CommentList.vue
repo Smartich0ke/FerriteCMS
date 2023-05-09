@@ -2,8 +2,10 @@
     <div class="comment-list">
         <CommentForm :postId="postId" />
         <div v-for="(comment, index) in comments" :key="index">
-            <AsyncComment :comment="comment" :postId="postId" :postSlug="postSlug" />
+            <Comment :comment="comment" :postId="postId" :postSlug="postSlug" />
         </div>
+
+
     </div>
 </template>
 
@@ -11,6 +13,7 @@
 import CommentForm from './CommentForm.vue';
 import {ref, onMounted, defineAsyncComponent, watch} from 'vue';
 import axios from 'axios';
+import Comment from './Comment.vue';
 
 const AsyncComment = defineAsyncComponent(() => import('./Comment.vue'));
 
@@ -18,6 +21,7 @@ export default {
     components: {
         CommentForm,
         AsyncComment,
+        Comment,
     },
     props: {
         postSlug: String,
