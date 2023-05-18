@@ -22,9 +22,15 @@ class CommentController extends Controller
             'email' => 'required|email',
             'text' => 'required',
             'parent_id' => 'nullable|exists:comments,id',
+            'post_id' => 'required|exists:posts,id'
         ]);
 
-        $comment = Comment::create($request->all());
+        $comment = new Comment();
+        $comment->author = $request->name;
+        $comment->email = $request->email;
+        $comment->text = $request->text;
+        $comment->parent_id = $request->parent_id;
+        $comment->post_id = $request->post_id;
         return response()->json($comment, 201);
     }
 

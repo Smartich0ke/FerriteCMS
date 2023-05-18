@@ -28,6 +28,7 @@
             <div class="">
                 <form action="{{ route('comments.store') }}" method="post">
                     @csrf
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
                     <div class="d-flex flex-row gap-2">
                         <div class="flex-grow-1">
                             <input type="text" class="form-control" name="name" placeholder="Name">
