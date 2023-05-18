@@ -25,7 +25,3 @@ Route::middleware(['api'])->group(function () {
     Route::get('/posts/{postId}/tags', [postTagsController::class, 'index']);
 });
 
-
-Route::get('/posts/{slug}/comments', [CommentController::class, 'index']);
-Route::post('/comments', [CommentController::class, 'store']);
-Route::post('/comments/{id}/like', [CommentController::class, 'like']);

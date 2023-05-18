@@ -26,17 +26,18 @@
         <div class="px-5 pb-5">
             <h3>Comments</h3>
             <div class="">
-                <form action="">
+                <form action="{{ route('comments.store') }}" method="post">
+                    @csrf
                     <div class="d-flex flex-row gap-2">
                         <div class="flex-grow-1">
-                            <input type="text" class="form-control" placeholder="Name">
+                            <input type="text" class="form-control" name="name" placeholder="Name">
                         </div>
                         <div class="flex-grow-1">
-                            <input type="text" class="form-control" placeholder="Email">
+                            <input type="text" class="form-control" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="mt-2">
-                        <textarea class="form-control" placeholder="Comment" rows="4"></textarea>
+                        <textarea class="form-control" name="text" placeholder="Comment" rows="4"></textarea>
                     </div>
                     <div class="mt-2">
                         <button class="btn btn-primary">Submit</button>
