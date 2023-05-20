@@ -11,17 +11,20 @@
     </div>
     </div>
     <div v-if="formShown" class="reply-form w-100">
-        <form action="" class="w-100">
+        <form action="/comments/create" method="post" class="w-100">
+            <input type="hidden" name="_token" :value="csrf">
+            <input type="hidden" name="post_id" :value="postid">
+            <input type="hidden" name="parent_id" :value="parentid">
             <div class="d-flex flex-row gap-2">
                 <div class="flex-grow-1">
-                    <input type="text" class="form-control" placeholder="Name">
+                    <input type="text" name="name" class="form-control" placeholder="Name">
                 </div>
                 <div class="flex-grow-1">
-                    <input type="text" class="form-control" placeholder="Email (not shown publicly)">
+                    <input type="text" name="email" class="form-control" placeholder="Email (not shown publicly)">
                 </div>
             </div>
             <div class="mt-2">
-                <textarea class="form-control" placeholder="Comment" rows="2"></textarea>
+                <textarea class="form-control" name="text" placeholder="Comment" rows="2"></textarea>
             </div>
             <div class="mt-2">
                 <button class="btn btn-primary">Submit</button>
@@ -40,6 +43,20 @@ export default {
                 type: Boolean,
                 default: false
             }
+        }
+    },
+    props : {
+        postid: {
+            type: String,
+            required: true
+        },
+        parentid: {
+            type: String,
+            required: true
+        },
+        csrf: {
+            type: String,
+            required: true
         }
     },
     methods: {
