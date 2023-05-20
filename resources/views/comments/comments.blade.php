@@ -10,17 +10,14 @@
                 <div>
                     {{ $comment->text }}
                 </div>
-                    <post-reply></post-reply>
+                    <post-reply postid="{{ $post->id }}" parentid="{{ $comment->id }}" csrf="{{ csrf_token() }}"></post-reply>
                 <view-replies>
                     @foreach($comment->replies as $reply)
-                        @include('comments.comments', ['comments' => $reply])
+                        @include('comments.comments', ['comment' => $reply])
                     @endforeach
                 </view-replies>
             </div>
         </div>
     </div>
 
-    @foreach($comment->replies as $reply)
-        @include('comments.comments', ['comments' => $reply])
-    @endforeach
 </div>
