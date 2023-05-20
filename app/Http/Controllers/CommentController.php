@@ -31,7 +31,8 @@ class CommentController extends Controller
         $comment->text = $request->text;
         $comment->parent_id = $request->parent_id;
         $comment->post_id = $request->post_id;
-        return response()->json($comment, 201);
+        $comment->save();
+        return back();
     }
 
     public function like($id)

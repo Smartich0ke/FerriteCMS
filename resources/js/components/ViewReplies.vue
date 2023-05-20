@@ -1,9 +1,11 @@
 <template>
-        <div @click="viewReplies" class="text-sm text-primary view-form-button d-inline pe-2">
-            <template v-if="!repliesShown" class="d-inline">
+        <div @click="viewReplies" class="text-sm text-primary view-form-button pt-1 ps-2 d-flex flex-row align-items-center">
+            <template v-if="!repliesShown" class="">
+                <iconify-icon icon="mdi:chevron-down" width="1.6rem" height="1.6rem"></iconify-icon>
                 View Replies
             </template>
             <template v-else class="d-inline">
+                <iconify-icon icon="mdi:chevron-up" width="1.6rem" height="1.6rem"></iconify-icon>
                 Hide Replies
             </template>
         </div>
@@ -35,13 +37,17 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import './../../sass/_variables.scss';
 .view-form-button {
     font-weight: bolder;
     font-size: 0.9rem;
+    padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+    border-radius: 20px;
 }
 .view-form-button:hover {
     cursor: pointer;
+    background-color: lighten($primary, 45%) !important;
     /*text-decoration: underline;*/
 }
 </style>

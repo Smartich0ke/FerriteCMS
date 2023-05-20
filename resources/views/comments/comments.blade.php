@@ -1,0 +1,26 @@
+<div class="comment">
+    <div class="pt-3">
+        <div class="d-flex flex-row gap-3">
+            <img src="{{ gravatarProfileImage($comment->email, 64) }}" height="64" width="64" alt="" class="rounded-2 border">
+            <div class="d-flex flex-column justify-content-start align-items-start w-100">
+                <div class="d-flex flex-row align-items-center gap-2">
+                    <strong class="">{{ $comment->author }}</strong>
+                    <div style="font-size: 0.85rem" class="text-muted">{{ formatShortDate($comment->created_at) }}</div>
+                </div>
+                <div>
+                    {{ $comment->text }}
+                </div>
+                    <post-reply></post-reply>
+                <view-replies>
+                    @foreach($comment->replies as $reply)
+                        @include('comments.comments', ['comments' => $reply])
+                    @endforeach
+                </view-replies>
+            </div>
+        </div>
+    </div>
+
+    @foreach($comment->replies as $reply)
+        @include('comments.comments', ['comments' => $reply])
+    @endforeach
+</div>
