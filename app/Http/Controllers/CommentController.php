@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentLike;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Post;
@@ -37,8 +38,34 @@ class CommentController extends Controller
 
     public function like($id)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->increment('likes');
-        return response()->json($comment);
+        $existing_like = CommentLike::where('comment_id', $id)->where('ip_address', request()->ip())->first();
+        if($existing_like){
+            $existing_like->delete();
+            return response()->json([
+                'success' => 'true',
+                'message' => 'Comment unliked successfully'
+            ]);
+        }
+        else{
+            $comment= new CommentLike();
+            $comment->comment_id = $id;
+            $comment->ip_address = request()->ip();
+            $comment->save();
+            return response()->json([
+                'success' => 'true',
+                'message' => 'Comment liked successfully'
+            ]);
+        }
+
+    }
+
+    public function likes($id)
+    {
+        $comment = Comment::find($id);
+        $likes = $comment->likes()->count();
+        return response()->json([
+            'success' => 'true',
+            'likes' => $likes
+        ]);
     }
 }

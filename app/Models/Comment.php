@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CommentLike;
 
 class Comment extends Model
 {
@@ -31,6 +32,16 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(CommentLike::class);
+    }
+
+    public function hasBeenLikedByClient()
+    {
+        return $this->likes()->where('ip_address', request()->ip())->exists();
     }
 
 }

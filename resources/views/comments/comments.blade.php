@@ -10,7 +10,7 @@
                 <div>
                     {{ $comment->text }}
                 </div>
-                    <post-reply postid="{{ $post->id }}" parentid="{{ $comment->id }}" csrf="{{ csrf_token() }}"></post-reply>
+                    <post-reply :initial-like-status='{{ $comment->hasBeenLikedByClient() }}' :initial-likes-count='{{ $comment->likes()->count() }}' commentid="{{ $comment->id }}" postid="{{ $post->id }}" parentid="{{ $comment->id }}" csrf="{{ csrf_token() }}"></post-reply>
                 <view-replies>
                     @foreach($comment->replies as $reply)
                         @include('comments.comments', ['comment' => $reply])

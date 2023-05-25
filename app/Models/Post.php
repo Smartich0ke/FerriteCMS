@@ -68,4 +68,5 @@ class Post extends Model
         // Grab only top level comments (those with no parent)
         return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
+
 }
