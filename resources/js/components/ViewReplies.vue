@@ -1,11 +1,11 @@
 <template>
         <div @click="viewReplies" class="text-sm text-primary view-form-button pt-1 ps-2 d-flex flex-row align-items-center">
             <template v-if="!repliesShown" class="">
-                <iconify-icon icon="mdi:chevron-down" width="1.6rem" height="1.6rem"></iconify-icon>
+                <iconify-icon icon="mdi:chevron-down" width="26" height="26"></iconify-icon>
                 View Replies
             </template>
             <template v-else class="d-inline">
-                <iconify-icon icon="mdi:chevron-up" width="1.6rem" height="1.6rem"></iconify-icon>
+                <iconify-icon icon="mdi:chevron-up" width="26" height="26"></iconify-icon>
                 Hide Replies
             </template>
         </div>
