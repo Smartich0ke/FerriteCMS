@@ -80,31 +80,21 @@ export default {
         showForm() {
             this.formShown = !this.formShown;
         },
-        async likeAndUpdate() {
-            this.likeStatus = !this.likeStatus;
-            await this.likePost();
-            this.fetchLikesCount();
-
-        },
-         async likePost() {
+        likeAndUpdate() {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ comment_id: this.commentid })
             };
-                 await fetch('/api/comments/'+this.commentid+'/like', requestOptions)
-                    .then(response => response.json());
-
-        },
-        fetchLikesCount(props) {
-
-            fetch('/api/comments/'+this.commentid+'/likes')
-                .then(response => response.json())
+            fetch('/api/comments/'+this.commentid+'/like', requestOptions)
+                .then(response => response.json()
                 .then(data => {
                     this.likescount = data.likes;
-                });
-
-        }
+                    this.likeStatus = data.liked;
+                }
+                )
+            );
+        },
     },
     mounted() {
         this.formShown = false;

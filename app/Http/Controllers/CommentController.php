@@ -42,7 +42,9 @@ class CommentController extends Controller
         if($existing_like){
             $existing_like->delete();
             return response()->json([
-                'success' => 'true',
+                'success' => true,
+                'liked' => false,
+                'likes' => $existing_like->comment->likes()->count(),
                 'message' => 'Comment unliked successfully'
             ]);
         }
@@ -52,7 +54,9 @@ class CommentController extends Controller
             $comment->ip_address = request()->ip();
             $comment->save();
             return response()->json([
-                'success' => 'true',
+                'success' => true,
+                'liked' => true,
+                'likes' => $comment->comment->likes()->count(),
                 'message' => 'Comment liked successfully'
             ]);
         }
