@@ -36,16 +36,14 @@ Route::post('comments/create', [App\Http\Controllers\CommentController::class, '
 Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
 Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
 Route::get('/images/create', [App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
+Route::post('/images/create', [App\Http\Controllers\ImageController::class, 'store'])->name('images.store');
 Route::post('/comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/admin/comments', function () {
     return view('admin.comments.index');
 })->name('admin.comments.index');
 
-Route::get('/admin/images', function () {
-    return view('admin.images.index');
-})->name('admin.images.index');
-
+Route::get('/admin/images', [App\Http\Controllers\ImageController::class, 'index'])->name('admin.images.index');
 Route::get('/admin/files', function () {
     return view('admin.files.index');
 })->name('admin.files.index');
