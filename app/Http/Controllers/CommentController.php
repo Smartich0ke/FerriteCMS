@@ -38,7 +38,7 @@ class CommentController extends Controller
 
     public function like($id)
     {
-        $existing_like = CommentLike::where('comment_id', $id)->where('ip_address', request()->ip())->first();
+        $existing_like = CommentLike::where('comment_id', $id)->where('uuid', request()->cookie('anonymous_session'))->first();
         if($existing_like){
             $existing_like->delete();
             return response()->json([
@@ -51,7 +51,7 @@ class CommentController extends Controller
         else{
             $comment= new CommentLike();
             $comment->comment_id = $id;
-            $comment->ip_address = request()->ip();
+            $comment->uuid = request()->cookie('anonymous_session');
             $comment->save();
             return response()->json([
                 'success' => true,

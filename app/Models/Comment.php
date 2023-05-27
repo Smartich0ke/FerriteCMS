@@ -41,7 +41,7 @@ class Comment extends Model
 
     public function hasBeenLikedByClient()
     {
-        return $this->likes()->where('ip_address', request()->ip())->exists();
+        return $this->likes()->where('uuid', request()->cookie('anonymous_session'))->exists();
     }
 
 }

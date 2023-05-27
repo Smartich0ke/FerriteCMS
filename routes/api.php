@@ -25,5 +25,5 @@ Route::middleware(['api'])->group(function () {
     Route::get('/posts/{postId}/tags', [postTagsController::class, 'index']);
 });
 
-Route::post('/comments/{id}/like', [CommentController::class, 'like']);
+Route::post('/comments/{id}/like', [CommentController::class, 'like'])->middleware(['EnsureAnonymousSessionTokenExists']);
 Route::get('/comments/{id}/likes', [CommentController::class, 'likes']);

@@ -84,7 +84,9 @@ export default {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ comment_id: this.commentid })
+                body: JSON.stringify({
+                    comment_id: this.commentid,
+                })
             };
             fetch('/api/comments/'+this.commentid+'/like', requestOptions)
                 .then(response => response.json()

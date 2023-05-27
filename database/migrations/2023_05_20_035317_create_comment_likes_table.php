@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('comment_id');
-            $table->string('ip_address');
+            $table->uuid('uuid');
         });
     }
 

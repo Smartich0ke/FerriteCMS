@@ -63,7 +63,7 @@ Route::get('/gallery', function () {
     return view('gallery.index');
 })->name('gallery.index');
 
-Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show')->middleware(['EnsureAnonymousSessionTokenExists']);
 
 Auth::routes();
 
