@@ -12,6 +12,11 @@ class ImageController extends Controller
         return view('admin.images.index', compact('images'));
     }
 
+    public function gallery() {
+        $images = Image::all();
+        return view('gallery.index', compact('images'));
+    }
+
     public function create() {
         return view('admin.images.create');
     }
@@ -19,6 +24,7 @@ class ImageController extends Controller
     public function store(Request $request) {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:20048',
+            'orientation' => 'required|string|max:125',
             'alt_text' => 'required|string|max:125'
         ]);
 
@@ -31,6 +37,7 @@ class ImageController extends Controller
         $image = new Image();
         $image->image = $fullPath;
         $image->alt_text = $request->alt_text;
+        $image->image_orientation = $request->orientation;
         $image->save();
 
         return back()

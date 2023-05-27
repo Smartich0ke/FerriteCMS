@@ -15,6 +15,14 @@
                 @error('alt_text') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
             <div class="mb-3">
+                <label for="orientation" class="form-label">Orientation</label>
+                <select class="form-select" aria-label="Default select example" name="orientation">
+                    <option value="landscape">Landscape</option>
+                    <option value="portrait">Portrait</option>
+                    <option value="square" selected>Square</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image" placeholder="Post Title">
                 @error('image') <div class="text-danger">{{ $message }}</div> @enderror
