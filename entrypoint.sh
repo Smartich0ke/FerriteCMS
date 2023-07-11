@@ -16,7 +16,7 @@ chmod -R 775 /var/www/html/bootstrap/cache
 
 set -e
 
-host="db"
+host="${DB_HOST}"
 user="${DB_USERNAME}"
 password="${DB_PASSWORD}"
 database="${DB_DATABASE}"
