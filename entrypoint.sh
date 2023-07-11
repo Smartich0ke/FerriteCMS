@@ -16,17 +16,17 @@ chmod -R 775 /var/www/html/bootstrap/cache
 
 set -e
 
-host="${DB_HOST}"
-user="${DB_USERNAME}"
-password="${DB_PASSWORD}"
-database="${DB_DATABASE}"
+# host="${DB_HOST}"
+# user="${DB_USERNAME}"
+# password="${DB_PASSWORD}"
+# database="${DB_DATABASE}"
 
-until PGPASSWORD=$password psql -h "$host" -U "$user" -d "$database" -c '\q'; do
-  >&2 echo "Postgres is unavailable - sleeping"
-  sleep 1
-done
+# until PGPASSWORD=$password psql -h "$host" -U "$user" -d "$database" -c '\q'; do
+#   >&2 echo "Postgres is unavailable - sleeping"
+#   sleep 1
+# done
 
->&2 echo "Postgres is up - running migrations"
+# >&2 echo "Postgres is up - running migrations"
 
 php artisan migrate --no-interaction --force
 
