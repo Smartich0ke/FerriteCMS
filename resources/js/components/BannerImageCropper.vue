@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            postUrl: 'http://127.0.0.1:8000/admin/posts/create/banner-upload',
+            postUrl: '/admin/posts/create/banner-upload',
             imagePath: null,
             image: {
                 src: null,
