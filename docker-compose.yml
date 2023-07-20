@@ -1,0 +1,73 @@
+version: '3.8'
+services:
+    php-apache:
+        # build:
+        #     context: .
+        #     dockerfile: Dockerfile
+        image: ghcr.io/smartich0ke/ferritecms:master
+
+        depends_on:
+          db:
+            condition: service_healthy
+        env_file:
+            - .env
+        volumes:
+            - /data/ferritetest:/var/www/html/storage/app/public
+        environment:
+            - APP_NAME=test
+            - APP_ENV=production
+            - APP_URL=http://localhost:8000
+            - SESSION_DRIVER=redis
+            - CACHE_DRIVER=redis
+            - QUEUE_CONNECTION=redis
+            - REDIS_CLIENT=predis
+            - REDIS_HOST=redis
+            - REDIS_PASSWORD=null
+            - REDIS_PORT=6379
+            - DB_CONNECTION=pgsql
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_DATABASE=ferrite
+            - DB_USERNAME=ferrite-user
+            - DB_PASSWORD=ReallyStrongPassword
+        ports:
+            - 8000:80
+        networks:
+            - app-network
+        restart: unless-stopped
+
+    db:
+        image: postgres:13
+        volumes:
+            - db:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER_ID: 0
+            POSTGRES_GROUP_ID: 0
+            POSTGRES_DB: ferrite
+            POSTGRES_USER: ferrite-user
+            POSTGRES_PASSWORD: ReallyStrongPassword
+        networks:
+            - app-network
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    redis:
+        image: redis:latest
+        ports:
+            - 6379:6379
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+  db:
+    driver: local
+
+
+

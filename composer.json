@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "laravolt/avatar": "^5.0",
+        "predis/predis": "^2.2",
         "spatie/laravel-tags": "^4.3"
     },
     "require-dev": {
