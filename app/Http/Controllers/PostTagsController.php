@@ -43,34 +43,38 @@ class PostTagsController extends Controller
         return response()->json($tags, 200);
     }
 
-    public function showIndex() {
+    public function showIndex()
+    {
         //show all post tags to public
         $tags = Tag::all();
         return view('tags.index', compact('tags'));
     }
 
-    public function show(Request $request, $tag) {
-        //show all posts with a specific tag to public. Include sorting options
-        $posts = Post::withAnyTags([$tag])->get();
-        $filter = null;
-        if ($request->query('filter')) {
-            $filter = $request->query('filter');
+    public function show(Request $request, $tag)
+    {
+        $filter = $request->query('filter');
+
+        $query = Post::withAnyTags([$tag])->where('private', false);
+
+        if ($filter) {
             if ($filter == 'newest') {
-                $posts = Post::withAnyTags([$tag])->orderBy('created_at', 'desc')->paginate(5);
+                $query->orderBy('created_at', 'desc');
             } elseif ($filter == 'oldest') {
-                $posts = Post::withAnyTags([$tag])->orderBy('created_at', 'asc')->paginate(5);
+                $query->orderBy('created_at', 'asc');
             } elseif ($filter == 'alphabetical') {
-                $posts = Post::withAnyTags([$tag])->orderBy('title', 'asc')->paginate(5);
+                $query->orderBy('title', 'asc');
             } elseif ($filter == 'reverse-alphabetical') {
-                $posts = Post::withAnyTags([$tag])->orderBy('title', 'desc')->paginate(5);
+                $query->orderBy('title', 'desc');
             } else {
-                $posts = Post::withAnyTags([$tag])->orderBy('created_at', 'desc')->paginate(5);
+                $query->orderBy('created_at', 'desc');
             }
         } else {
-            $posts = Post::withAnyTags([$tag])->orderBy('created_at', 'desc')->paginate(5);
+            $query->orderBy('created_at', 'desc');
         }
+
+        $posts = $query->paginate(5);
 
         return view('tags.show', compact('posts', 'filter', 'request', 'tag'));
     }
-}
 
+}
