@@ -16,6 +16,14 @@ class CommentController extends Controller
         return response()->json($comments);
     }
 
+    public function adminIndex()
+    {
+        $comments = Comment::paginate(20);
+        return view('admin.comments.index', [
+            'comments' => $comments
+        ]);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
