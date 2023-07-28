@@ -25,7 +25,7 @@
                         <td>{{ $post->slug }}</td>
                         <td>{{ $post->user->name }}</td>
                         <td>100</td>
-                        <td>50</td>
+                        <td>{{ $post->comments()->count() }}</td>
                         <td>{{ formatShortDate($post->created_at) }}</td>
                         <td>{{ formatShortDate($post->updated_at) }}</td>
                         <td>
