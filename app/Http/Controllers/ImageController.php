@@ -45,5 +45,12 @@ class ImageController extends Controller
             ->with('image', $imageName);
     }
 
+    public function destroy($id) {
+        $image = Image::findOrFail($id);
+        $image->delete();
+        return back()
+            ->with('success', 'Image deleted successfully.');
+    }
+
 
 }

@@ -22,7 +22,11 @@
                             <td>
                                 <a class="btn btn-sm btn-outline-primary me-1" target="_blank" href="{{ Storage::url($image->image) }}">View</a>
                                 <button class="btn btn-sm btn-outline-primary me-1">Edit</button>
-                                <button class="btn btn-sm btn-outline-danger">Move To Rubbish Bin</button>
+                                <form class="d-inline" action="{{ route('images.destroy', $image->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" value="Delete Permanently" class="btn btn-sm btn-outline-danger">
+                                </form>
                             </td>
                         </tr>
                     @endforeach
