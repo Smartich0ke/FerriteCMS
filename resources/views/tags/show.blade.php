@@ -41,6 +41,11 @@
                 </p>
             </article>
         @endforeach
+        @if($posts->count() == 0)
+            <div class="d-flex flex-row justify-content-center">
+                <div class="text-muted mt-5">Looks like there's not much here at the moment.</div>
+            </div>
+        @endif
 
         <div class="d-flex flex-row justify-content-center">
             {{ $posts->links() }}

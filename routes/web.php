@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Admin Routes
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->middleware(['auth'])->name('admin.dashboard');
 
 Route::get('/admin/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('admin.posts.create')->middleware(['auth']);
 Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 'store'])->name('admin.posts.store')->middleware(['auth']);
@@ -38,10 +36,8 @@ Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'sho
 Route::get('/images/create', [App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
 Route::post('/images/create', [App\Http\Controllers\ImageController::class, 'store'])->name('images.store');
 Route::post('/comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
-
-Route::get('/admin/comments', function () {
-    return view('admin.comments.index');
-})->name('admin.comments.index');
+Route::delete('/images/{id}/delete', [App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
+Route::get('/admin/comments', [App\Http\Controllers\CommentController::class, 'adminIndex'])->name('admin.comments.index');
 
 Route::get('/admin/images', [App\Http\Controllers\ImageController::class, 'index'])->name('admin.images.index');
 Route::get('/admin/files', function () {

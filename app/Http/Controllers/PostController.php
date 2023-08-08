@@ -11,26 +11,31 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     public function index(Request $request) {
-        //If a get query for "filter" is set, sort by newest, oldest, a-z, z-a
-        $filter = null;
-        if ($request->query('filter')) {
-            $filter = $request->query('filter');
+        $filter = $request->query('filter');
+
+        $query = Post::where('private', false);
+
+        if ($filter) {
             if ($filter == 'newest') {
-                $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
+                $query->orderBy('created_at', 'desc');
             } elseif ($filter == 'oldest') {
-                $posts = Post::where('private', false)->orderBy('created_at', 'asc')->paginate(5);
+                $query->orderBy('created_at', 'asc');
             } elseif ($filter == 'alphabetical') {
-                $posts = Post::where('private', false)->orderBy('title', 'asc')->paginate(5);
+                $query->orderBy('title', 'asc');
             } elseif ($filter == 'reverse-alphabetical') {
-                $posts = Post::where('private', false)->orderBy('title', 'desc')->paginate(5);
+                $query->orderBy('title', 'desc');
             } else {
-                $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
+                $query->orderBy('created_at', 'desc');
             }
         } else {
-            $posts = Post::where('private', false)->orderBy('created_at', 'desc')->paginate(5);
+            $query->orderBy('created_at', 'desc');
         }
+
+        $posts = $query->paginate(5);
+
         return view('posts.index', compact('posts', 'filter', 'request'));
     }
+
 
     public function adminIndex() {
         $posts = Post::paginate('20')->sortBy(['created_at', 'desc']);
@@ -135,6 +140,10 @@ class PostController extends Controller
 
     public function show($slug) {
         $post = Post::where('slug', $slug)->get()->firstOrFail();
+        if ($post->private && !auth()->check()) {
+            //return 404
+            abort(404);
+        }
         return view('posts.show', compact('post'));
     }
 
