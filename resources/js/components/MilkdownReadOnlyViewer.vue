@@ -36,7 +36,6 @@ import docker from 'refractor/lang/docker'
 import brainfuck from 'refractor/lang/brainfuck'
 import scss from 'refractor/lang/scss'
 import sass from 'refractor/lang/sass'
-import {defineComponent} from "vue";
 
 export default defineComponent({
     name: "MilkdownReadOnlyViewer",
