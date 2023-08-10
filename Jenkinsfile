@@ -29,6 +29,10 @@ spec:
                 sh 'composer install'
                 sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
+
+                // Build assets
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
 
