@@ -46,7 +46,9 @@ spec:
         // Package into a docker image
         stage('Package') {
             steps {
-               def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
+               script {
+                 def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
+               }
             }
         }
 
