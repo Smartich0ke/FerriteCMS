@@ -94,8 +94,8 @@
                     <strong>{{ auth()->user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">New Post...</a></li>
-                    <li><a class="dropdown-item" href="#">New Gallery Image...</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.posts.create') }}">New Post...</a></li>
+                    <li><a class="dropdown-item" href="{{ route('images.create') }}">New Gallery Image...</a></li>
                     <li><a class="dropdown-item" href="#">Profile Settings</a></li>
                     <li>
                         <hr class="dropdown-divider">
@@ -135,6 +135,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link py-3
+                     @if (isActiveRoute('admin.categories.*')) active @endif " @if(isActiveRoute('admin.categories.*')) aria-current="page" @endif title="Categories" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <iconify-icon icon="mdi:shape" width="24" height="24"></iconify-icon>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.comments.index') }}" class="nav-link py-3
                     @if (isActiveRoute('admin.comments.*')) active @endif " @if(isActiveRoute('admin.comments.*')) aria-current="page" @endif title="comments" data-bs-toggle="tooltip" data-bs-placement="right">
                         <iconify-icon icon="mdi:comment-text-multiple" width="24" height="24"></iconify-icon>
@@ -161,11 +167,11 @@
             </ul>
             <div class="dropdown border-top">
                 <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+                    <img src="{{ gravatarProfileImage(auth()->user()->email, '32') }}" alt="mdo" width="24" height="24" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu-dark dropdown-menu text-small shadow bg-dark " aria-labelledby="dropdownUser3">
-                    <li><a class="dropdown-item " href="#">New project...</a></li>
-                    <li><a class="dropdown-item " href="#">Settings</a></li>
+                    <li><a class="dropdown-item " href="{{ route('admin.posts.create') }}">New post...</a></li>
+                    <li><a class="dropdown-item " href="{{ route('images.create') }}">New Gallery Image...</a></li>
                     <li><a class="dropdown-item " href="#">Profile</a></li>
                     <li>
                         <hr class="dropdown-divider ">
