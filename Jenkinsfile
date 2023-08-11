@@ -16,7 +16,7 @@ spec:
     - name: docker
       image: docker:latest
       command:
-        - sleep
+        - cat
       tty: true
       privileged: true
       volumeMounts:
