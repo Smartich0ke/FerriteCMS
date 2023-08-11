@@ -42,6 +42,14 @@ spec:
                 sh './vendor/bin/phpunit'
             }
         }
+
+        // Package into a docker image
+        stage('Package') {
+            steps {
+               app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
+            }
+        }
+
     }
 
 }
