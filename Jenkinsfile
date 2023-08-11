@@ -1,23 +1,7 @@
 pipeline {
     agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: shell
-    image: harbor.artichokenetwork.com/library/php-tools:8.1
-    command:
-    - sleep
-    args:
-    - infinity
-'''
-            // Can also wrap individual steps:
-            // container('shell') {
-            //     sh 'hostname'
-            // }
-            defaultContainer 'shell'
+        docker {
+            image 'harbor.artichokenetwork.com/library/php-tools:8.2'
         }
     }
     stages {
