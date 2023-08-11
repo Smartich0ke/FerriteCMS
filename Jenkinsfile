@@ -61,6 +61,9 @@ spec:
                 container('docker') {
                    script {
                      def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
+                     docker.withRegistry('https://harbor.artichokenetwork.com', '453d0ba1-373f-4dd9-897f-aab4c395a1cf') {
+                         app.push()
+                     }
                    }
                 }
             }
