@@ -1,9 +1,37 @@
 pipeline {
     agent {
-        docker {
-            image 'harbor.artichokenetwork.com/library/php-tools:8.2'
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: php-tools
+      image: harbor.artichokenetwork.com/library/php-tools:8.1
+      command:
+      - sleep
+      args:
+      - infinity
+
+    - name: docker
+      image: docker:latest
+      command:
+        - sleep
+      tty: true
+      privileged: true
+      volumeMounts:
+        - name: dockersock
+          mountPath: /var/run/docker.sock
+
+  volumes:
+    - name: dockersock
+      hostPath:
+        path: /var/run/docker.sock
+'''
+            defaultContainer 'php-tools'
         }
     }
+
     stages {
 
         // Install dependencies and build the project
@@ -30,9 +58,11 @@ pipeline {
         // Package into a docker image
         stage('Package') {
             steps {
-               script {
-                 def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
-               }
+                container('docker') {
+                   script {
+                     def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
+                   }
+                }
             }
         }
 
