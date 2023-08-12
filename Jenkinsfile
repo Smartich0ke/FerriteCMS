@@ -73,7 +73,7 @@ spec:
                          app.push()
                      }
 
-                     sh 'cosign sign --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                     sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
                    }
                 }
             }
