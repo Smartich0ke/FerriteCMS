@@ -2,6 +2,7 @@ pipeline {
     environment {
       COSIGN_PASSWORD=credentials('cosign-password')
       COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
+      DOCKER_TOKEN=credentials('453d0ba1-373f-4dd9-897f-aab4c395a1cf')
     }
     agent {
         kubernetes {
@@ -68,12 +69,12 @@ spec:
                    sh 'apk update'
                    sh 'apk add cosign'
 
-                     def app = docker.build("harbor.artichokenetwork.com/ferritecms/ferrite:latest")
-                     docker.withRegistry('https://harbor.artichokenetwork.com', '453d0ba1-373f-4dd9-897f-aab4c395a1cf') {
-                         app.push()
-                     }
+                   sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
 
-                     sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                   sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                   sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+
+                   sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
                    }
                 }
             }
