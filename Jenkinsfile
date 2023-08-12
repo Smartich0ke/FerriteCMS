@@ -71,7 +71,7 @@ spec:
 
                    sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
 
-                   sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                   sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
                    sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
 
                    sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
