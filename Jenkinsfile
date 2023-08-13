@@ -7,74 +7,66 @@ pipeline {
       DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
 
-    agent none
+    agent {
+        label "default"
+    }
 
     stages {
 
         stage('Clone Repository') {
             agent {
-            label 'git'
+                label "git"
             }
             steps {
-                node('git') {
-                     git url: "https://github.com/Smartich0ke/FerriteCMS.git"
-                }
+                git url: "https://github.com/Smartich0ke/FerriteCMS.git"
             }
         }
 
         stage('Build') {
             agent {
-            label 'php-tools-8.1'
+                label "php-tools-8.1"
             }
 
             steps {
-                node('php-tools-8.1') {
-                    sh 'composer install'
-                    sh 'cp .env.example .env'
-                    sh 'php artisan key:generate'
+                sh 'composer install'
+                sh 'cp .env.example .env'
+                sh 'php artisan key:generate'
 
-                    // Build assets
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
+                // Build assets
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
 
         stage('Test') {
             agent {
-            label 'php-tools-8.1'
+                label "php-tools-8.1"
             }
 
             steps {
-                node('php-tools-8.1') {
-                    sh './vendor/bin/phpunit'
-                }
+                sh './vendor/bin/phpunit'
             }
         }
 
         stage('Package') {
             agent {
-            label 'docker'
+                label "docker"
             }
 
             steps {
-                node('docker') {
-                    sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
-                    sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
-                    sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
-                }
+                sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
+                sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
+                sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
             }
         }
 
         stage('Sign') {
             agent {
-            label 'cosign'
+                label "cosign"
             }
 
             steps {
-                node('cosign') {
-                    sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
-                }
+                sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
             }
         }
     }
