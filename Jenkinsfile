@@ -6,45 +6,23 @@ pipeline {
       DOCKER_CONTENT_TRUST="1"
       DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
-    agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: php-tools
-      image: harbor.artichokenetwork.com/library/php-tools:8.1
-      command:
-      - sleep
-      args:
-      - infinity
 
-    - name: docker
-      image: docker:latest
-      command:
-        - cat
-      tty: true
-      privileged: true
-      volumeMounts:
-        - name: dockersock
-          mountPath: /var/run/docker.sock
-
-  volumes:
-    - name: dockersock
-      hostPath:
-        path: /var/run/docker.sock
-'''
-            defaultContainer 'php-tools'
-        }
-    }
+    agent any
 
     stages {
 
-        // Install dependencies and build the project
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/Smartich0ke/FerriteCMS.git'
+                git url: "https://github.com/Smartich0ke/FerriteCMS.git"
+            }
+        }
+
+        stage('Build') {
+            agent {
+            label 'php-tools-8.1'
+            }
+
+            steps {
                 sh 'composer install'
                 sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
@@ -55,44 +33,36 @@ spec:
             }
         }
 
-        // Run unit tests
         stage('Test') {
+            agent {
+            label 'php-tools-8.1'
+            }
+
             steps {
                 sh './vendor/bin/phpunit'
             }
         }
 
-        // Package into a docker image
         stage('Package') {
+            agent {
+            label 'docker'
+            }
+
             steps {
-                container('docker') {
-                   script {
-
-                   sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
-
-                   sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
-                   sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
-
-                   }
-                }
+                sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
+                sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
+                sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
             }
         }
 
-        //Sign with Cosign
         stage('Sign') {
-            steps {
-                container('docker') {
-                   script {
-                    sh 'apk update'
-                    sh 'apk add cosign'
-
-                    sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
-
-                   }
+            agent {
+            label 'cosign'
             }
 
+            steps {
+                sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+            }
         }
-
     }
-
 }
