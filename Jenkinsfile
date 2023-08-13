@@ -7,11 +7,14 @@ pipeline {
       DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
 
-    agent any
+    agent none
 
     stages {
 
         stage('Clone Repository') {
+            agent {
+            label 'git'
+            }
             steps {
                 git url: "https://github.com/Smartich0ke/FerriteCMS.git"
             }
