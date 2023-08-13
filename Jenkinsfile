@@ -8,7 +8,7 @@ pipeline {
     }
 
     agent {
-        label "default"
+        label "jenkins-jenkins-agent"
     }
 
     stages {
