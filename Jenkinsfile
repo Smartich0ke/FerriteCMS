@@ -16,7 +16,7 @@ pipeline {
             label 'git'
             }
             steps {
-                script {
+                node('git') {
                      git url: "https://github.com/Smartich0ke/FerriteCMS.git"
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
             }
 
             steps {
-                script {
+                node('php-tools-8.1') {
                     sh 'composer install'
                     sh 'cp .env.example .env'
                     sh 'php artisan key:generate'
@@ -46,7 +46,7 @@ pipeline {
             }
 
             steps {
-                script {
+                node('php-tools-8.1') {
                     sh './vendor/bin/phpunit'
                 }
             }
@@ -58,7 +58,7 @@ pipeline {
             }
 
             steps {
-                script {
+                node('docker') {
                     sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
                     sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
                     sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
@@ -72,7 +72,7 @@ pipeline {
             }
 
             steps {
-                script {
+                node('cosign') {
                     sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
                 }
             }
