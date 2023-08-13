@@ -3,8 +3,8 @@ pipeline {
       COSIGN_PASSWORD=credentials('cosign-password')
       COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
       DOCKER_TOKEN=credentials('453d0ba1-373f-4dd9-897f-aab4c395a1cf')
-      DOCKER_CONTENT_TRUST=1
-      DOCKER_CONTENT_TRUST_SERVER=https://notary.artichokenetwork.com
+      DOCKER_CONTENT_TRUST="1"
+      DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
     agent {
         kubernetes {
