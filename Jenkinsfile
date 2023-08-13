@@ -16,7 +16,9 @@ pipeline {
             label 'git'
             }
             steps {
-                git url: "https://github.com/Smartich0ke/FerriteCMS.git"
+                script {
+                     git url: "https://github.com/Smartich0ke/FerriteCMS.git"
+                }
             }
         }
 
@@ -26,13 +28,15 @@ pipeline {
             }
 
             steps {
-                sh 'composer install'
-                sh 'cp .env.example .env'
-                sh 'php artisan key:generate'
+                script {
+                    sh 'composer install'
+                    sh 'cp .env.example .env'
+                    sh 'php artisan key:generate'
 
-                // Build assets
-                sh 'npm install'
-                sh 'npm run build'
+                    // Build assets
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
             }
         }
 
@@ -42,7 +46,9 @@ pipeline {
             }
 
             steps {
-                sh './vendor/bin/phpunit'
+                script {
+                    sh './vendor/bin/phpunit'
+                }
             }
         }
 
@@ -52,9 +58,11 @@ pipeline {
             }
 
             steps {
-                sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
-                sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
-                sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                script {
+                    sh 'echo "$DOCKER_TOKEN_PSW" | docker login harbor.artichokenetwork.com -u $DOCKER_TOKEN_USR --password-stdin'
+                    sh 'docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .'
+                    sh 'docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                }
             }
         }
 
@@ -64,7 +72,9 @@ pipeline {
             }
 
             steps {
-                sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                script {
+                    sh 'cosign sign --yes --key $COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest'
+                }
             }
         }
     }
