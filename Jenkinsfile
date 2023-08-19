@@ -7,7 +7,11 @@ pipeline {
       DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
 
-    agent none
+    agent {
+        kubernetes {
+            label 'default'
+        }
+    }
 
     stages {
 
