@@ -63,7 +63,7 @@ jobs:
         tools: composer:v2
 
     - name: Run PHPUnit Tests
-      run: ./vendor/bin/phpunit
+      run: vendor/bin/phpunit
 
   package:
     needs: test
