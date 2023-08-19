@@ -1,0 +1,93 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+  COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  DOCKER_CONTENT_TRUST: "1"
+  DOCKER_CONTENT_TRUST_SERVER: "https://notary.artichokenetwork.com"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up PHP with tools
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: composer:v2
+
+    - name: Install Dependencies
+      run: composer install
+
+    - name: Copy .env.example to .env
+      run: cp .env.example .env
+
+    - name: Generate Laravel Key
+      run: php artisan key:generate
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Build assets
+      run: |
+        npm install
+        npm run build
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up PHP with tools
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: composer:v2
+
+    - name: Run PHPUnit Tests
+      run: ./vendor/bin/phpunit
+
+  package:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Registry
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login harbor.artichokenetwork.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .
+        docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest
+
+  sign:
+    needs: package
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Sign the Docker Image
+      run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest
