@@ -7,7 +7,7 @@ pipeline {
       DOCKER_CONTENT_TRUST_SERVER="https://notary.artichokenetwork.com"
     }
 
-    agent any
+    agent none
 
     stages {
 
