@@ -13,7 +13,9 @@ pipeline {
 
         stage('Clone Repository') {
             agent {
-                label "git"
+                kubernetes {
+                    label 'git'
+                }
             }
             steps {
                 git url: "https://github.com/Smartich0ke/FerriteCMS.git"
@@ -22,7 +24,9 @@ pipeline {
 
         stage('Build') {
             agent {
-                label "php-tools-8.1"
+                kubernetes {
+                    label 'php-tools-8.1'
+                }
             }
 
             steps {
@@ -38,7 +42,9 @@ pipeline {
 
         stage('Test') {
             agent {
-                label "php-tools-8.1"
+                kubernetes {
+                    label 'php-tools-8.1'
+                }
             }
 
             steps {
@@ -48,7 +54,9 @@ pipeline {
 
         stage('Package') {
             agent {
-                label "docker"
+                kubernetes {
+                    label 'docker'
+                }
             }
 
             steps {
@@ -60,7 +68,9 @@ pipeline {
 
         stage('Sign') {
             agent {
-                label "cosign"
+                kubernetes {
+                    label 'cosign'
+                }
             }
 
             steps {
