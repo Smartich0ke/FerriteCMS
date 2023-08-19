@@ -9,7 +9,7 @@ pipeline {
 
     agent {
         kubernetes {
-            label 'default'
+            inheritFrom 'default'
         }
     }
 
@@ -18,7 +18,7 @@ pipeline {
         stage('Clone Repository') {
             agent {
                 kubernetes {
-                    label 'git'
+                    inheritFrom 'git'
                 }
             }
             steps {
@@ -29,7 +29,7 @@ pipeline {
         stage('Build') {
             agent {
                 kubernetes {
-                    label 'php-tools-8.1'
+                    inheritFrom 'php-tools-8.1'
                 }
             }
 
@@ -47,7 +47,7 @@ pipeline {
         stage('Test') {
             agent {
                 kubernetes {
-                    label 'php-tools-8.1'
+                    inheritFrom 'php-tools-8.1'
                 }
             }
 
@@ -59,7 +59,7 @@ pipeline {
         stage('Package') {
             agent {
                 kubernetes {
-                    label 'docker'
+                    inheritFrom 'docker'
                 }
             }
 
@@ -73,7 +73,7 @@ pipeline {
         stage('Sign') {
             agent {
                 kubernetes {
-                    label 'cosign'
+                    inheritFrom 'cosign'
                 }
             }
 
