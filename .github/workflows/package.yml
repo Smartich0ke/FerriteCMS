@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION} .
+          docker build -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION} -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${LATEST_BUILD_VERSION} .
           docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest
           docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION}
           docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${LATEST_BUILD_VERSION}
