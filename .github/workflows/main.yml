@@ -48,12 +48,6 @@ jobs:
         npm install
         npm run build
 
-    - name: Get Version from composer.json
-      run: echo "COMPOSER_VERSION=$(jq -r '.version' composer.json)" >> $GITHUB_ENV
-
-    - name: Bump Build Number
-      run: echo "VERSION=${COMPOSER_VERSION}-build-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
-
     - name: Run PHPUnit Tests
       run: vendor/bin/phpunit
 
@@ -70,6 +64,12 @@ jobs:
 
     - name: Login to Docker Registry
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login harbor.artichokenetwork.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: Get Version from composer.json
+      run: echo "COMPOSER_VERSION=$(jq -r '.version' composer.json)" >> $GITHUB_ENV
+
+    - name: Bump Build Number
+      run: echo "VERSION=${COMPOSER_VERSION}-build-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
 
     - name: Build and Push Docker Image
       run: |
