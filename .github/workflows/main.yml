@@ -48,6 +48,12 @@ jobs:
         npm install
         npm run build
 
+    - name: Get Version from composer.json
+      run: echo "COMPOSER_VERSION=$(jq -r '.version' composer.json)" >> $GITHUB_ENV
+
+    - name: Bump Build Number
+      run: echo "VERSION=${COMPOSER_VERSION}-build-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
     - name: Run PHPUnit Tests
       run: vendor/bin/phpunit
 
@@ -67,10 +73,13 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest .
+        docker build -t harbor.artichokenetwork.com/ferritecms/ferrite:latest -t harbor.artichokenetwork.com/ferritecms/ferrite:${VERSION} .
         docker push harbor.artichokenetwork.com/ferritecms/ferrite:latest
-        
-    - name: Sign the Docker Image
+        docker push harbor.artichokenetwork.com/ferritecms/ferrite:${VERSION}
+
+    - name: Sign the Docker Image with Latest Tag
       run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:latest
 
+    - name: Sign the Docker Image with Version Tag
+      run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY harbor.artichokenetwork.com/ferritecms/ferrite:${VERSION}
 
