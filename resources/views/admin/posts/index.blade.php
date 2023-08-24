@@ -24,24 +24,27 @@
                         <th scope="row"><a class="text-dark" href="{{ postURL($post) }}">{{ $post->title }}</a></th>
                         <td>{{ $post->slug }}</td>
                         <td>{{ $post->user->name }}</td>
-                        <td>100</td>
+                        <td>{{ fetchActiveUsersByUrl(parse_url( postURL($post) , PHP_URL_PATH), \Spatie\Analytics\Period::months(6)) }}</td>
                         <td>{{ $post->comments()->count() }}</td>
                         <td>{{ formatShortDate($post->created_at) }}</td>
                         <td>{{ formatShortDate($post->updated_at) }}</td>
-                        <td>
-                            <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                        <td class="d-flex flex-row">
+                            <a href="{{ route('admin.posts.edit', $post->slug) }}" class="d-inline btn btn-sm btn-outline-primary me-1">Edit</a>
                             @if($post->private)
-                                <form class="d-inline me-2" action="{{ route('admin.posts.publish', $post) }}" method="POST">
+                                <form class="d-inline me-1" action="{{ route('admin.posts.publish', $post) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-sm btn-outline-success">Make Public</button>
+                                    <button class="btn btn-sm btn-outline-success">Public</button>
                                 </form>
                             @else
-                                <form class="d-inline me-2" action="{{ route('admin.posts.private', $post) }}" method="POST">
+                                <form class="d-inline me-1" action="{{ route('admin.posts.private', $post) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-sm btn-outline-warning">Make Private</button>
+                                    <button class="btn btn-sm btn-outline-warning">Private</button>
                                 </form>
                             @endif
-                            <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
+                            <form class="d-inline me-1" action="{{ route('admin.posts.private', $post) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
