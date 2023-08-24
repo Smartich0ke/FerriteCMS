@@ -26,20 +26,36 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
-            'text' => 'required',
-            'parent_id' => 'nullable|exists:comments,id',
-            'post_id' => 'required|exists:posts,id'
-        ]);
+        if (auth()->user()) {
+            $this->validate($request, [
+                'text' => 'required|max:250',
+                'parent_id' => 'nullable|exists:comments,id',
+                'post_id' => 'required|exists:posts,id'
+            ]);
+            $comment = new Comment();
+            $comment->author = auth()->user()->name;
+            $comment->email = auth()->user()->email;
+            $comment->text = $request->text;
+            $comment->parent_id = $request->parent_id;
+            $comment->post_id = $request->post_id;
+            $comment->user_id = auth()->user()->id;
+        }
+        else {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email',
+                'text' => 'required|max:250',
+                'parent_id' => 'nullable|exists:comments,id',
+                'post_id' => 'required|exists:posts,id'
+            ]);
 
-        $comment = new Comment();
-        $comment->author = $request->name;
-        $comment->email = $request->email;
-        $comment->text = $request->text;
-        $comment->parent_id = $request->parent_id;
-        $comment->post_id = $request->post_id;
+            $comment = new Comment();
+            $comment->author = $request->name;
+            $comment->email = $request->email;
+            $comment->text = $request->text;
+            $comment->parent_id = $request->parent_id;
+            $comment->post_id = $request->post_id;
+        }
         $comment->save();
         return back();
     }
