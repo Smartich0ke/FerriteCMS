@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build --production
 
 # Stage 2: Setup PHP and dependencies
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 WORKDIR /var/www/html
 

@@ -1,0 +1,54 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+  COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  DOCKER_CONTENT_TRUST: "0"
+  DOCKER_CONTENT_TRUST_SERVER: "https://notary.artichokenetwork.com"
+  DOCKER_REGISTRY_URL: harbor.artichokenetwork.com
+  DOCKER_REPO: ferritecms
+  DOCKER_IMAGE_NAME: ferrite
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.1
+
+      - name: Login to Docker Registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ env.DOCKER_REGISTRY_URL }} -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Get Version from composer.json
+        run: echo "COMPOSER_VERSION=$(jq -r '.version' composer.json)" >> $GITHUB_ENV
+
+      - name: Bump Build Number
+        run: |
+          echo "VERSION=${COMPOSER_VERSION}-build-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          echo "LATEST_BUILD_VERSION=${COMPOSER_VERSION}" >> $GITHUB_ENV
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION} -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${LATEST_BUILD_VERSION} .
+          docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION}
+          docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${LATEST_BUILD_VERSION}
+
+      - name: Sign the Docker Image with Latest Tag
+        run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+
+      - name: Sign the Docker Image with Build Tag
+        run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${VERSION}
+
+      - name: Sign the Docker Image with Version Tag
+        run: cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_REPO }}/${{ env.DOCKER_IMAGE_NAME }}:${LATEST_BUILD_VERSION}

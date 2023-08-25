@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->string('author');
             $table->string('email');
             $table->text('text');

@@ -20,14 +20,14 @@
                 <tbody>
                 @foreach($comments as $comment)
                     <tr class="my-5">
-                        <th scope="row">1234</th>
-                        <td>Some Name</td>
+                        <th scope="row">{{ $comment->id }}</th>
+                        <td>{{ $comment->author }}</td>
                         <td>{{ Str::limit($comment->text, 13, $end='...') }}</td>
-                        <td>Some Post</td>
-                        <td>50</td>
-                        <td>2021-01-01</td>
+                        <td>{{ $comment->post()->title }}</td>
+                        <td>{{ $comment->likes()->count() }}</td>
+                        <td>{{ formatShortDate($comment->created_at) }}</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-danger">Move to Rubbish Bin</button>
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
                         </td>
                     </tr>
                 @endforeach
