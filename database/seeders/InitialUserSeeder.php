@@ -13,10 +13,12 @@ class InitialUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => env('INITIAL_ADMIN_NAME'),
-            'email' => env('INITIAL_ADMIN_EMAIL'),
-            'password' => bcrypt(env('INITIAL_ADMIN_PASSWORD')),
-        ]);
+        if (!User::where('email', env('INITIAL_ADMIN_EMAIL'))->exists()) {
+            User::factory()->create([
+                'name' => env('INITIAL_ADMIN_NAME'),
+                'email' => env('INITIAL_ADMIN_EMAIL'),
+                'password' => bcrypt(env('INITIAL_ADMIN_PASSWORD')),
+            ]);
+        }
     }
 }
