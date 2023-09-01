@@ -64,8 +64,8 @@
                             <a class="nav-link" href="#">Sites</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" method="get" action="{{ route('posts.search.index') }}">
+                        <input class="form-control me-2" name="query" type="search" placeholder="Search articles" aria-label="Search">
                         <button class="btn @if(Route::currentRouteName() == 'root') btn-outline-light @else btn-outline-dark @endif" type="submit">Search</button>
                     </form>
                 </div>
