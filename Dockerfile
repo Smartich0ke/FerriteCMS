@@ -29,11 +29,6 @@ RUN cp .env.example .env
 
 RUN composer install
 
-RUN chown -R www-data:www-data /var/www/html/storage
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 775 /var/www/html/storage
-RUN chmod -R 775 /var/www/html/bootstrap/cache
-
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
