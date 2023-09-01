@@ -64,6 +64,21 @@ class PostController extends Controller
         return view('admin.posts.create' , compact('categories'));
     }
 
+    public function search() {
+        //Search in the title, excerpt, then body. Prioritize the title, then excerpt, then body, with title being at the top, then excerpt, then body.
+        return view('posts.search', [
+        'posts' => Post::where(
+            'title', 'LIKE', '%' . request('query') . '%'
+        )->orWhere(
+            'excerpt', 'LIKE', '%' . request('query') . '%'
+        )->orWhere(
+            'body', 'LIKE', '%' . request('query') . '%'
+        )->get(),
+        
+        'search' => request('query'),
+        ]);
+    }
+
     public function update(Request $request, $slug) {
 
         $post = Post::where('slug', $slug)->get()->firstOrFail();
