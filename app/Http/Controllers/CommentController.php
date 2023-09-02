@@ -96,4 +96,11 @@ class CommentController extends Controller
             'likes' => $likes
         ]);
     }
+
+    public function destroy($id)
+    {
+        $comment = Comment::find($id);
+        $comment->delete();
+        return back();
+    }
 }

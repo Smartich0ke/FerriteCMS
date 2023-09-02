@@ -23,11 +23,16 @@
                         <th scope="row">{{ $comment->id }}</th>
                         <td>{{ $comment->author }}</td>
                         <td>{{ Str::limit($comment->text, 13, $end='...') }}</td>
-                        <td>{{ $comment->post()->title }}</td>
+                        <td>{{ $comment->post->title }}</td>
                         <td>{{ $comment->likes()->count() }}</td>
                         <td>{{ formatShortDate($comment->created_at) }}</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            <form action="{{ route('admin.comments.destroy', $comment->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -39,6 +39,7 @@ Route::post('/comments/create', [App\Http\Controllers\CommentController::class, 
 Route::delete('/images/{id}/delete', [App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
 Route::get('/admin/comments', [App\Http\Controllers\CommentController::class, 'adminIndex'])->name('admin.comments.index');
 Route::get('/posts/search', [App\Http\Controllers\PostController::class, 'search'])->name('posts.search.index');
+Route::delete('/admin/comments/{id}/delete', [App\Http\Controllers\CommentController::class, 'destroy'])->name('admin.comments.destroy');
 
 Route::get('/admin/images', [App\Http\Controllers\ImageController::class, 'index'])->name('admin.images.index');
 Route::get('/admin/files', function () {
