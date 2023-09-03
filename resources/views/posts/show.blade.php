@@ -12,7 +12,7 @@
                 <div class="text-muted">Last updated: {{ formatPostDateAndTime($post->updated_at) }}</div>
                 <div class="d-flex flex-row gap-2">
                     <div class="text-sm text-muted">In:
-                        <a class="link lightLink" href="">{{ $post->category->name }}</a>
+                        <a class="link lightLink" href="{{ route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a>
                     </div>
                     <div class="text-sm text-muted">Tags:
                         @foreach($post->tags as $tag)
