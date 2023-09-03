@@ -15,7 +15,7 @@
                     {{ $comment->text }}
                 </div>
                 <post-reply :initial-like-status='@if($comment->hasBeenLikedByClient() ) true @else false @endif ' :initial-likes-count='{{ $comment->likes()->count() }}' commentid="{{ $comment->id }}" postid="{{ $post->id }}" parentid="{{ $comment->id }}" csrf="{{ csrf_token() }}"></post-reply>
-                @if($comment->replies)
+                @if($comment->replies->count() > 0)
                     <view-replies>
                         @foreach($comment->replies as $reply)
                             @include('comments.comments', ['comment' => $reply])
