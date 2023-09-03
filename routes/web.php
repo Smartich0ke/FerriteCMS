@@ -123,7 +123,11 @@ Route::controller(PostTagsController::class)->group(function () {
 //==================================================================================================
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/admin/dashboard', 'dashboard')->middleware(['auth'])->name('admin.dashboard');
+    Route::get('/profile', 'profile')->middleware(['auth'])->name('profile');
+    Route::post('/profile', 'updateProfile')->middleware(['auth'])->name('profile.update');
+    Route::post('/password', 'updatePassword')->middleware(['auth'])->name('profile.password.update');
 });
+
 
 Route::get('/admin/rubbish-bin', function () {
     return view('admin.rubbish_bin');

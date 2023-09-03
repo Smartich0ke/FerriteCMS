@@ -74,7 +74,7 @@ class PostController extends Controller
         )->orWhere(
             'body', 'LIKE', '%' . request('query') . '%'
         )->get(),
-        
+
         'search' => request('query'),
         ]);
     }
@@ -175,5 +175,11 @@ class PostController extends Controller
             'success'=>'Image Uploaded Successfully',
             'path'=>$fullPath,
         ]);
+    }
+
+    public function destroy($id) {
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
