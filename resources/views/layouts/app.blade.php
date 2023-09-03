@@ -22,7 +22,7 @@
     @if (Route::currentRouteName() == 'root')
         <style>
             body {
-                background-image: url('{{ env('IMAGE_CDN_URL') . 'DSC_2330.JPG' }}');
+                background-image: url(/static/img/root_background.webp);
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
