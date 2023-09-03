@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostTagsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,57 +20,113 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Admin Routes
-Route::get('/admin/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->middleware(['auth'])->name('admin.dashboard');
-
-Route::get('/admin/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('admin.posts.create')->middleware(['auth']);
-Route::post('/admin/posts/create', [App\Http\Controllers\PostController::class, 'store'])->name('admin.posts.store')->middleware(['auth']);
-Route::post('/admin/posts/create/banner-upload', [App\Http\Controllers\PostController::class, 'uploadBannerImage'])->name('admin.posts.upload-banner-image')->middleware(['auth']);
-Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
-Route::get('/admin/posts', [App\Http\Controllers\PostController::class, 'adminIndex'])->name('admin.posts.index');
-Route::get('/admin/categories', [App\Http\Controllers\CategoryController::class, 'adminIndex'])->name('admin.categories.index');
-Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
-Route::get('categories/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
-Route::get('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.categories.create');
-Route::post('/admin/categories/create', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.categories.store');
-Route::get('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('admin.posts.edit');
-Route::post('/admin/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'update'])->name('admin.posts.update');
-Route::post('/admin/posts/{id}/private', [App\Http\Controllers\PostController::class, 'makePrivate'])->name('admin.posts.private')->middleware(['auth']);
-Route::post('/admin/posts/{id}/publish', [App\Http\Controllers\PostController::class, 'makePublic'])->name('admin.posts.publish')->middleware(['auth']);
-Route::post('comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
-Route::get('/tags', [App\Http\Controllers\PostTagsController::class, 'showIndex'])->name('tags.index');
-Route::get('/tags/{slug}', [App\Http\Controllers\PostTagsController::class, 'show'])->name('tags.show');
-Route::get('/images/create', [App\Http\Controllers\ImageController::class, 'create'])->name('images.create');
-Route::post('/images/create', [App\Http\Controllers\ImageController::class, 'store'])->name('images.store');
-Route::post('/comments/create', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
-Route::delete('/images/{id}/delete', [App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
-Route::get('/admin/comments', [App\Http\Controllers\CommentController::class, 'adminIndex'])->name('admin.comments.index');
-Route::get('/posts/search', [App\Http\Controllers\PostController::class, 'search'])->name('posts.search.index');
-Route::delete('/admin/comments/{id}/delete', [App\Http\Controllers\CommentController::class, 'destroy'])->name('admin.comments.destroy');
-Route::delete('/admin/categories/{id}/delete', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-
-Route::get('/admin/images', [App\Http\Controllers\ImageController::class, 'index'])->name('admin.images.index');
-Route::get('/admin/files', [App\Http\Controllers\FileController::class, 'index'])->name('admin.files.index');
-Route::get('/admin/files/create', [App\Http\Controllers\FileController::class, 'create'])->name('admin.files.create');
-Route::post('/admin/files/create', [App\Http\Controllers\FileController::class, 'store'])->name('admin.files.store');
-Route::get('/admin/files/{id}/download', [App\Http\Controllers\FileController::class, 'download'])->name('files.download');
-Route::delete('/admin/files/{id}/delete', [App\Http\Controllers\FileController::class, 'destroy'])->name('admin.files.destroy');
-
-Route::get('/admin/rubbish-bin', function () {
-    return view('admin.rubbish_bin');
-})->name('admin.rubbish-bin.index');
-
-//Public Routes
+// Static Routes
 Route::get('/', function () {
     return view('root');
 })->name('root');
 Route::get('/about', function () {
     return view('static.about');
 })->name('about');
-Route::get('/gallery', [App\Http\Controllers\ImageController::class, 'gallery'])->name('gallery.index');
 
-Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show')->middleware(['EnsureAnonymousSessionTokenExists']);
+// Post Routes
+//==================================================================================================
+Route::controller(PostController::class)->group(function () {
+
+    // Public Post Routes
+    Route::get('/posts', 'index')->name('posts.index');
+    Route::get('/posts/search', 'search')->name('posts.search.index');
+    Route::get('/posts/{slug}', 'show')->name('posts.show')->middleware(['EnsureAnonymousSessionTokenExists']);
+
+    // Admin Post Routes
+    Route::get('/admin/posts', 'adminIndex')->name('admin.posts.index');
+    Route::get('/admin/posts/create', 'create')->name('admin.posts.create')->middleware(['auth']);
+    Route::post('/admin/posts/create', 'store')->name('admin.posts.store')->middleware(['auth']);
+    Route::get('/admin/posts/{slug}/edit', 'edit')->name('admin.posts.edit');
+    Route::post('/admin/posts/{slug}/edit', 'update')->name('admin.posts.update');
+    Route::post('/admin/posts/{id}/private', 'makePrivate')->name('admin.posts.private')->middleware(['auth']);
+    Route::post('/admin/posts/{id}/publish', 'makePublic')->name('admin.posts.publish')->middleware(['auth']);
+    Route::post('/admin/posts/create/banner-upload', 'uploadBannerImage')->name('admin.posts.upload-banner-image')->middleware(['auth']);
+
+});
+
+// Category Routes
+//==================================================================================================
+Route::controller(CategoryController::class)->group(function () {
+
+    // Public Category Routes
+    Route::get('/categories', 'index')->name('categories.index');
+    Route::get('categories/{slug}', 'show')->name('categories.show');
+
+    // Admin Category Routes
+    Route::get('/admin/categories', 'adminIndex')->name('admin.categories.index');
+    Route::get('/admin/categories/create', 'create')->name('admin.categories.create');
+    Route::post('/admin/categories/create', 'store')->name('admin.categories.store');
+    Route::delete('/admin/categories/{id}/delete', 'destroy')->name('admin.categories.destroy');
+
+});
+
+// Image Routes
+//==================================================================================================
+Route::controller(ImageController::class)->group(function () {
+
+    // Public Image Routes
+    Route::get('/gallery', 'gallery')->name('gallery.index');
+
+    // Admin Image Routes
+    Route::get('/admin/images', 'index')->name('admin.images.index');
+    Route::get('/images/create', 'create')->name('images.create');
+    Route::post('/images/create', 'store')->name('images.store');
+    Route::delete('/images/{id}/delete', 'destroy')->name('images.destroy');
+
+});
+
+// File Routes
+//==================================================================================================
+Route::controller(FileController::class)->group(function () {
+
+    // Public File Routes
+    Route::get('/files/{id}/download', 'download')->name('files.download');
+
+    // Admin File Routes
+    Route::get('/admin/files', 'index')->name('admin.files.index');
+    Route::get('/admin/files/create', 'create')->name('admin.files.create');
+    Route::post('/admin/files/create', 'store')->name('admin.files.store');
+    Route::delete('/admin/files/{id}/delete', 'destroy')->name('admin.files.destroy');
+
+});
+
+// Comment Routes
+//==================================================================================================
+Route::controller(CommentController::class)->group(function() {
+
+    // Public Comment Routes
+    Route::post('comments/create', 'store')->name('comments.store');
+    Route::post('/comments/create', 'store')->name('comments.store');
+
+    // Admin Comment Routes
+    Route::get('/admin/comments', 'adminIndex')->name('admin.comments.index');
+    Route::delete('/admin/comments/{id}/delete', 'destroy')->name('admin.comments.destroy');
+
+});
+
+// Tag Routes
+//==================================================================================================
+Route::controller(PostTagsController::class)->group(function () {
+
+    // Public Tag Routes
+    Route::get('/tags', 'showIndex')->name('tags.index');
+    Route::get('/tags/{slug}', 'show')->name('tags.show');
+
+});
+
+// Admin Dashboard Routes
+//==================================================================================================
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/admin/dashboard', 'dashboard')->middleware(['auth'])->name('admin.dashboard');
+});
+
+Route::get('/admin/rubbish-bin', function () {
+    return view('admin.rubbish_bin');
+})->name('admin.rubbish-bin.index');
 
 Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
