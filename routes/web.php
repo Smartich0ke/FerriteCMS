@@ -133,4 +133,4 @@ Route::get('/admin/rubbish-bin', function () {
     return view('admin.rubbish_bin');
 })->name('admin.rubbish-bin.index');
 
-Auth::routes();
+Auth::routes(['register' => false]);
