@@ -23,7 +23,7 @@ class ImageController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|size:2000000',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2000000',
             'orientation' => 'required|string|max:125',
             'alt_text' => 'required|string|max:125'
         ]);
