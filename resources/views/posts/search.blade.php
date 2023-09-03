@@ -27,7 +27,9 @@
         @endforeach
         @if($posts->count() == 0)
             <div class="d-flex flex-row justify-content-center">
-                <div class="text-muted mt-5">Looks like there's not much here at the moment.</div>
+                <div class="text-muted mt-5 text-center">
+                    Hmmm... No results found for "{{ $search }}". Try searching for something else.
+                </div>
             </div>
         @endif
 
