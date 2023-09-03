@@ -43,9 +43,11 @@ Route::delete('/admin/comments/{id}/delete', [App\Http\Controllers\CommentContro
 Route::delete('/admin/categories/{id}/delete', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
 Route::get('/admin/images', [App\Http\Controllers\ImageController::class, 'index'])->name('admin.images.index');
-Route::get('/admin/files', function () {
-    return view('admin.files.index');
-})->name('admin.files.index');
+Route::get('/admin/files', [App\Http\Controllers\FileController::class, 'index'])->name('admin.files.index');
+Route::get('/admin/files/create', [App\Http\Controllers\FileController::class, 'create'])->name('admin.files.create');
+Route::post('/admin/files/create', [App\Http\Controllers\FileController::class, 'store'])->name('admin.files.store');
+Route::get('/admin/files/{id}/download', [App\Http\Controllers\FileController::class, 'download'])->name('files.download');
+Route::delete('/admin/files/{id}/delete', [App\Http\Controllers\FileController::class, 'destroy'])->name('admin.files.destroy');
 
 Route::get('/admin/rubbish-bin', function () {
     return view('admin.rubbish_bin');
