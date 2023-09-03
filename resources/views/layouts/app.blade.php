@@ -90,10 +90,12 @@
             @yield('content')
         </main>
 
-        <footer class="mt-2 mb-0">
-            <hr class="mx-5">
-            <div class="text-muted text-center "><a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content Management System v1.0.0 by Nikolai Patrick. <a class="text-muted me-auto" href="{{ route('login') }}">Admin login</a></div>
-        </footer>
+        @if(Route::currentRouteName() != 'root')
+            <footer class="mt-2 mb-0">
+                <hr class="mx-5">
+                <div class="text-muted text-center "><a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content Management System v1.0.0 by Nikolai Patrick. <a class="text-muted me-auto" href="{{ route('login') }}">Admin login</a></div>
+            </footer>
+        @endif
     </div>
 @yield('post-app')
 </body>
