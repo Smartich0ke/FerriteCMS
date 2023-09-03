@@ -27,7 +27,7 @@
                 </div>
             @endif
         </div>
-        <div class="text-sm text-muted text-center m-3">See more on my Instagram: <a href="#" class="link">@npatrick_photos</a></div>
+        <div class="text-sm text-muted text-center m-3">See more on my Instagram: <a href="https://www.instagram.com/npatrick_photos/" target="_blank" class="link">@npatrick_photos</a></div>
     </article>
 </div>
 @endsection
