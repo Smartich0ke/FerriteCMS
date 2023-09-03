@@ -2,7 +2,7 @@
 @section('content')
     <div class="contentContainer">
         <header class="d-flex flex-row justify-content-center">
-            <h1 class="text-center">Articles tagged with "{{ $tag}}"</h1>
+            <h1 class="text-center">Articles tagged with "{{ $tag }}"</h1>
         </header>
 
 
@@ -57,4 +57,12 @@
     <script>window.addEventListener("DOMContentLoaded", (event) => {
             document.getElementById("filterSelect").addEventListener("change", ({target}) => target.form.submit());
         });</script>
+@endsection
+@section('meta-tags')
+    <meta name="description" content="See all articles tagged with "{{ $tag }}"">
+    <meta property="og:description" content="See all articles tagged with "{{ $tag }}"">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa, {{ $tag }}">
+@endsection
+@section('page-title')
+Articles tagged with "{{ $tag->name }}"
 @endsection

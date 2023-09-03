@@ -55,3 +55,11 @@
                 </ul>
         </article>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="Nikolai Patrick's personal website. Software development, engineering, photography.">
+    <meta property="og:description" content="Nikolai Patrick's personal website. Software development, engineering, photography.">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa, about">
+@endsection
+@section('page-title')
+About
+@endsection

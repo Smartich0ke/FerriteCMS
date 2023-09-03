@@ -9,3 +9,11 @@
         @endforeach
     </div>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="All article tags">
+    <meta property="og:description" content="All article tags">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa, tags">
+@endsection
+@section('page-title')
+All Tags
+@endsection

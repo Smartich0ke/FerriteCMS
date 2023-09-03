@@ -52,3 +52,11 @@
             document.getElementById("filterSelect").addEventListener("change", ({target}) => target.form.submit());
         });</script>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="{{ $category->description }}">
+    <meta property="og:description" content="{{ $category->description }}">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa, {{ $category->name }}">
+@endsection
+@section('page-title')
+{{ $category->name }}
+@endsection

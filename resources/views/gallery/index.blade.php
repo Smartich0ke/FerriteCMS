@@ -31,3 +31,11 @@
     </article>
 </div>
 @endsection
+@section('meta-tags')
+    <meta property="description" content="A collection of my favourite photos I've taken over the years."/>
+    <meta property="og:description" content="A collection of my favourite photos I've taken over the years."/>
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa">
+@endsection
+@section('page-title')
+Gallery
+@endsection

@@ -70,3 +70,12 @@
 
     </article>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="{{ $post->excerpt }}">
+    <meta property="og:description" content="{{ $post->excerpt }}">
+    <meta name="keywords" content="@foreach($post->tags as $tag){{ $tag->name }}@if(!$loop->last), @endif
+@endforeach">
+@endsection
+@section('page-title')
+{{ $post->title }}
+@endsection

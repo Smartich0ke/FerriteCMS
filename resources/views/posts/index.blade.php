@@ -58,3 +58,11 @@
             document.getElementById("filterSelect").addEventListener("change", ({target}) => target.form.submit());
         });</script>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="Nikolai Patrick's articles on software engineering, photography, and other topics.">
+    <meta property="og:description" content="Nikolai Patrick's articles on software engineering, photography, and other topics.">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa">
+@endsection
+@section('page-title')
+All Articles
+@endsection

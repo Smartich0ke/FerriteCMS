@@ -23,3 +23,11 @@
         @endif
     </div>
 @endsection
+@section('meta-tags')
+    <meta name="description" content="All categories on Nikolai Patrick's personal website.">
+    <meta property="og:description" content="">
+    <meta name="keywords" content="Nikolai Patrick, software, engineering, photography, personal website, blog, australia, sa, categories">
+
+@section('page-title')
+All Categories
+@endsection

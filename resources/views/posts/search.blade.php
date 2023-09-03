@@ -46,3 +46,6 @@
             document.getElementById("filterSelect").addEventListener("change", ({target}) => target.form.submit());
         });</script>
 @endsection
+@section('page-title')
+Search results for "{{ $search }}"
+@endsection

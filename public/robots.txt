@@ -1,2 +1,24 @@
 User-agent: *
-Disallow:
+
+# Allow all agents to access the root and about pages
+Allow: /
+Allow: /about
+
+# Allow indexing of posts, categories, and tags for better SEO
+Allow: /posts/*
+Allow: /categories/*
+Allow: /tags/*
+
+# Allow the gallery and files to be downloaded
+Allow: /gallery
+Allow: /files/*
+
+# Disallow indexing of any admin, authentication and other private routes
+Disallow: /admin/*
+Disallow: /login
+Disallow: /register
+Disallow: /password
+Disallow: /profile
+
+# Might as well disallow indexing of the search page
+Disallow: /posts/search

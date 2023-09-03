@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ env('APP_NAME') }}</title>
+    <title>@yield('page-title') | {{ env('APP_NAME') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,6 +30,20 @@
             }
         </style>
     @endif
+
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Nikolai Patrick">
+
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="@yield('page-title')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    @yield('meta-tags')
+
+
 </head>
 <body>
     <div id="app">
@@ -42,13 +56,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('root') }}">Home</a>
+                            <a class="nav-link @if(Route::currentRouteName() === 'root') active @endif" aria-current="page" href="{{ route('root') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('about') }}">About</a>
+                            <a class="nav-link @if(Route::currentRouteName() === 'about') active @endif" href="{{ route('about') }}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('gallery.index') }}">Gallery</a>
+                            <a class="nav-link @if(Route::currentRouteName() === 'gallery.index') active @endif" href="{{ route('gallery.index') }}">Gallery</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
