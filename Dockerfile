@@ -27,12 +27,14 @@ COPY --from=asset-builder /app .
 
 RUN cp .env.example .env
 
-RUN composer install
+RUN composer install --optimize-autoloader
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 COPY ./apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+COPY php.ini /usr/local/etc/php/
 
 RUN php artisan storage:link
 
