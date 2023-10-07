@@ -65,17 +65,13 @@ class PostController extends Controller
     }
 
     public function search() {
-        //Search in the title, excerpt, then body. Prioritize the title, then excerpt, then body, with title being at the top, then excerpt, then body.
         return view('posts.search', [
-        'posts' => Post::where(
-            'title', 'LIKE', '%' . request('query') . '%'
-        )->orWhere(
-            'excerpt', 'LIKE', '%' . request('query') . '%'
-        )->orWhere(
-            'body', 'LIKE', '%' . request('query') . '%'
-        )->get(),
-
-        'search' => request('query'),
+            'posts' => Post::where(function ($query) {
+                $query->where('title', 'LIKE', '%' . request('query') . '%')
+                    ->orWhere('excerpt', 'LIKE', '%' . request('query') . '%')
+                    ->orWhere('body', 'LIKE', '%' . request('query') . '%');
+            })->where('private', false)->get(),
+            'search' => request('query'),
         ]);
     }
 
