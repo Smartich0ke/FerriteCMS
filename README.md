@@ -49,7 +49,7 @@ php artisan serve
 
 - Laravel
 - PHP
-- MariaDB (SQLite for development)
+- Postgres (SQLite for development)
 
 #### Frontend:
 
