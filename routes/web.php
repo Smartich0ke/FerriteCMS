@@ -27,6 +27,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('static.about');
 })->name('about');
+Route::get('/pc-repair', function () {
+    return view('static.pc_repair');
+})->name('pc-repair');
 
 // Post Routes
 //==================================================================================================

@@ -72,6 +72,9 @@
                         <li class="nav-item">
                             <a class="nav-link @if(Route::currentRouteName() === 'gallery.index') active @endif" href="{{ route('gallery.index') }}">Gallery</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::currentRouteName() === 'pc-repair') active @endif" href="{{ route('pc-repair') }}">PC Repair</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Articles
@@ -101,7 +104,7 @@
         @if(Route::currentRouteName() != 'root')
             <footer class="mt-2 mb-0">
                 <hr class="mx-5">
-                <div class="text-muted text-center "><a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content Management System v1.0.4 by Nikolai Patrick. <a class="text-muted me-auto" href="{{ route('login') }}">Admin login</a></div>
+                <div class="text-muted text-center "><a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content Management System v1.1.0 by Nikolai Patrick. <a class="text-muted me-auto" href="{{ route('login') }}">Admin login</a></div>
             </footer>
         @endif
     </div>
