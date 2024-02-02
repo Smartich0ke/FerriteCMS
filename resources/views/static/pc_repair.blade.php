@@ -21,7 +21,7 @@
         I charge $20 per hour, with a minimum charge of $10. Just contact me to arrange a time to drop off your PC, and I will get back to you with a quote. I am located in the southern suburbs of Adelaide.
     </p>
     <p>
-        If you are interested, please contact me at <a href="mailto:{{ config('contact.email') }}">{{ config('contact.phone') }}</a> or phone me at <a href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a>.
+        If you are interested, please contact me at <a href="mailto:{{ config('contact.email') }}">{{ config('contact.email') }}</a> or phone me at <a href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a>.
     </p>
 </article>
 @endsection
