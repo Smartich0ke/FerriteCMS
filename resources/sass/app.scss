@@ -253,3 +253,14 @@ p code {
     }
 }
 
+.button-hover-pill {
+    padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+    border-radius: 20px;
+}
+.button-hover-pill:hover {
+    cursor: pointer;
+    background-color: $gray-200;
+}
+.cursor-pointer {
+    cursor: pointer;
+}

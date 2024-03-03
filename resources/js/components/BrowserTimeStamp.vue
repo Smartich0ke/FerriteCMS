@@ -1,9 +1,9 @@
 <template>
-    <div class="d-inline-flex align-items-center view-form-button">
+    <div class="d-inline-flex align-items-center button-hover-pill">
         <div @click="toggleTimeFormat">
             {{ displayTime }}
         </div>
-        <span @click="toggleTimeFormat" class="d-inline-flex flex-row justify-content-center align-items-center ms-1 cursor-pointer ">
+        <span @click="toggleTimeFormat" class="d-inline-flex flex-row justify-content-center align-items-center ms-1 cursor-pointer">
             <iconify-icon style="margin: auto" icon="mdi:calendar-clock" width="1.2em" height="1.2em"></iconify-icon>
         </span>
     </div>
@@ -53,15 +53,5 @@ export default {
 
 <style lang="scss" scoped>
 @import './../../sass/_variables.scss';
-.cursor-pointer {
-    cursor: pointer;
-}
-.view-form-button {
-    padding: 0.1rem 0.6rem 0.1rem 0.6rem;
-    border-radius: 20px;
-}
-.view-form-button:hover {
-    cursor: pointer;
-    background-color: $gray-200;
-}
+
 </style>
