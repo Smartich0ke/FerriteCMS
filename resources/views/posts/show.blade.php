@@ -9,7 +9,10 @@
 
         <div class="px-2 px-sm-5 py-5">
             <div class="pb-3">
-                <div class="text-muted">Last updated: {{ formatPostDateAndTime($post->updated_at) }}</div>
+                <div class="text-muted d-inline">Last updated:
+                    <browser-time-stamp utc-time="{{ $post->updated_at }}"></browser-time-stamp>
+                </div>
+
                 <div class="d-flex flex-row gap-2">
                     <div class="text-sm text-muted">In:
                         <a class="link lightLink" href="{{ route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a>
