@@ -6,13 +6,13 @@ mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache/data
 mkdir -p /var/www/html/bootstrap/cache
 
-# Ensure the storage directories are owned by www-data
-chown -R www-data:www-data /var/www/html/storage
-chown -R www-data:www-data /var/www/html/bootstrap/cache
-
-# Ensure the storage directories have the correct permissions
-chmod -R 775 /var/www/html/storage
-chmod -R 775 /var/www/html/bootstrap/cache
+## Ensure the storage directories are owned by www-data
+#chown -R www-data:www-data /var/www/html/storage
+#chown -R www-data:www-data /var/www/html/bootstrap/cache
+#
+## Ensure the storage directories have the correct permissions
+#chmod -R 775 /var/www/html/storage
+#chmod -R 775 /var/www/html/bootstrap/cache
 
 set -e
 
