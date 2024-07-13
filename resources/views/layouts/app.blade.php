@@ -56,67 +56,17 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Nikolai Patrick</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() === 'root') active @endif" aria-current="page" href="{{ route('root') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() === 'about') active @endif" href="{{ route('about') }}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() === 'gallery.index') active @endif" href="{{ route('gallery.index') }}">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() === 'pc-repair') active @endif" href="{{ route('pc-repair') }}">PC Repair</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Articles
-                            </a>
-                            <ul class="dropdown-menu nav-drop"  aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('posts.index') }}">All Articles</a></li>
-                                <li><a class="dropdown-item" href="{{ route('tags.index') }}">Tags</a></li>
-                                <li><a class="dropdown-item" href="{{ route('categories.index') }}">Categories</a></li>
-                            </ul>
-                        </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link" href="#">Sites</a>--}}
-{{--                        </li>--}}
-                    </ul>
-                    <form class="d-flex" method="get" action="{{ route('posts.search.index') }}">
-                        <input class="form-control me-2" name="query" type="search" placeholder="Search articles" aria-label="Search">
-                        <button class="btn @if(Route::currentRouteName() == 'root') btn-outline-light @else btn-outline-dark @endif" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
+            @include('layouts.nav')
         </nav>
 
         <main class="p-3">
             @yield('content')
         </main>
 
-        @if(Route::currentRouteName() != 'root')
-            <footer class="mt-2 mb-2">
-                <hr class="mx-5">
-                <div class="d-flex flex-column align-items-center justify-content-center">
-                        <div class="d-flex flex-row justify-content-center gap-2 mb-1">
-                            <a class="text-decoration-none text-dark" href="{{ url('/feed') }}"><iconify-icon icon="mdi:rss-box" width="2.5em" height="2.5em"></iconify-icon></a>
-                        </div>
+        <footer>
+            @include('layouts.footer')
+        </footer>
 
-                    <div class="text-muted text-center ">
-                        <a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content
-                        Management System v1.2.1 by Nikolai Patrick.
-                        <a class="text-muted me-auto" href="{{ route('login') }}">login</a></div>
-                </div>
-
-            </footer>
-        @endif
     </div>
 @yield('post-app')
 </body>
