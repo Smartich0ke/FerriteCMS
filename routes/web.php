@@ -31,6 +31,12 @@ Route::get('/pc-repair', function () {
     return view('static.pc_repair');
 })->name('pc-repair');
 
+Route::controller(HealthCheckController::class)->group(function () {
+    Route::get('/readiness', 'readiness');
+    Route::get('/liveness', 'liveness');
+    Route::get('/healthz', 'readiness');
+});
+
 // Post Routes
 //==================================================================================================
 Route::controller(PostController::class)->group(function () {
