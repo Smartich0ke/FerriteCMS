@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostTagsController;
+use App\Http\Controllers\SocialLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,15 @@ Route::middleware(['api'])->group(function () {
     Route::post('/posts/{postId}/tags', [postTagsController::class, 'store']);
     Route::delete('/posts/{postId}/tags', [postTagsController::class, 'destroy']);
     Route::get('/posts/{postId}/tags', [postTagsController::class, 'index']);
+});
+
+Route::middleware(['api'])->group(function () {
+    Route::get('/social-links', [SocialLinkController::class, 'get']);
+    Route::post('/social-links', [SocialLinkController::class, 'store']);
+    Route::put('/social-links/order', [SocialLinkController::class, 'updateOrder']);
+    Route::put('/social-links/{id}', [SocialLinkController::class, 'update']);
+    Route::delete('/social-links/{id}', [SocialLinkController::class, 'destroy']);
+
 });
 
 Route::post('/comments/{id}/like', [CommentController::class, 'like'])->middleware(['EnsureAnonymousSessionTokenExists']);

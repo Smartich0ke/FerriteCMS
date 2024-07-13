@@ -80,12 +80,26 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.rubbish-bin.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
-                    @if (isActiveRoute('admin.rubbish-bin.index')) active @endif " @if(isActiveRoute('admin.rubbish-bin.index')) aria-current="page" @endif >
-                        <iconify-icon icon="mdi:trash" width="16" height="16"></iconify-icon>
-                        Rubbish Bin
+                    <a href="{{ route('admin.config.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2
+                    @if (isActiveRoute('admin.config.*')) active @endif " @if(isActiveRoute('admin.config.*')) aria-current="page" @endif >
+                        <iconify-icon icon="mdi:spanner" width="16" height="16"></iconify-icon>
+                        Configuration
                     </a>
                 </li>
+{{--                <li>--}}
+{{--                    <a href="{{ route('admin.payments.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2--}}
+{{--                    @if (isActiveRoute('admin.payments.*')) active @endif " @if(isActiveRoute('admin.payments.*')) aria-current="page" @endif >--}}
+{{--                        <iconify-icon icon="mdi:payment" width="16" height="16"></iconify-icon>--}}
+{{--                        Payments--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a href="{{ route('admin.rubbish-bin.index') }}" class="nav-link text-white d-flex flex-row align-items-center gap-2--}}
+{{--                    @if (isActiveRoute('admin.rubbish-bin.index')) active @endif " @if(isActiveRoute('admin.rubbish-bin.index')) aria-current="page" @endif >--}}
+{{--                        <iconify-icon icon="mdi:trash" width="16" height="16"></iconify-icon>--}}
+{{--                        Rubbish Bin--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
             <hr>
             <div class="dropdown">
@@ -159,11 +173,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link py-3
-                     @if (isActiveRoute('')) active @endif " @if(isActiveRoute('')) aria-current="page" @endif title="Rubbish Bin" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <iconify-icon icon="mdi:trash" width="24" height="24"></iconify-icon>
+                    <a href="{{ route('admin.config.index') }}" class="nav-link py-3
+                     @if (isActiveRoute('admin.config.*')) active @endif " @if(isActiveRoute('admin.config.*')) aria-current="page" @endif title="Files" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <iconify-icon icon="mdi:spanner" width="24" height="24"></iconify-icon>
                     </a>
                 </li>
+{{--                <li>--}}
+{{--                    <a href="#" class="nav-link py-3--}}
+{{--                     @if (isActiveRoute('')) active @endif " @if(isActiveRoute('')) aria-current="page" @endif title="Rubbish Bin" data-bs-toggle="tooltip" data-bs-placement="right">--}}
+{{--                        <iconify-icon icon="mdi:trash" width="24" height="24"></iconify-icon>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
             <div class="dropdown border-top">
                 <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
