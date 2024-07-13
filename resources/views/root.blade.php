@@ -6,7 +6,7 @@
             <h2 class="text-center">Software development, engineering, photography</h2>
             <div class="d-flex flex-row gap-3 justify-content-center align-items-center">
                 @foreach($socialLinks as $socialLink)
-                    <a href="{{ $socialLink->url }}" class="text-dark" ><iconify-icon height="48" width="48" icon="{{ $socialLink->icon }}" title="{{ $socialLink->platform }}"></iconify-icon></a>
+                    <a href="{{ $socialLink->url }}" class="text-dark" ><iconify-icon height="24" width="24" icon="{{ $socialLink->icon }}" title="{{ $socialLink->platform }}"></iconify-icon></a>
                 @endforeach
             </div>
         </div>
