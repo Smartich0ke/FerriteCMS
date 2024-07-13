@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Feed\Feed;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
 /**
@@ -48,7 +51,7 @@ use Spatie\Tags\HasTags;
  * @method static \Illuminate\Database\Eloquent\Builder|Post withoutTags(\ArrayAccess|\Spatie\Tags\Tag|array|string $tags, ?string $type = null)
  * @mixin \Eloquent
  */
-class Post extends Model
+class Post extends Model implements Feedable
 {
     use HasFactory;
     use HasTags;
@@ -68,5 +71,30 @@ class Post extends Model
         // Grab only top level comments (those with no parent)
         return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
+
+    public function link()
+    {
+        return route('posts.show', $this->slug);
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        $user = $this->user()->get()->first();
+        $link = $this->link();
+        return FeedItem::create()
+            ->id($this->id)
+            ->title($this->title)
+            ->summary($this->excerpt)
+            ->updated($this->updated_at)
+            ->link($link)
+            ->authorName($user->name)
+            ->authorEmail($user->email);
+    }
+
+    public static function getFeedItems()
+    {
+        return Post::all();
+    }
+
 
 }
