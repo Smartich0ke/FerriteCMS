@@ -6,7 +6,7 @@ function gravatarProfileImage($email, $size = 80)
 {
     $hash = md5(strtolower(trim($email)));
     $default = "mp";
-    $url = "https://www.gravatar.com/avatar/{$hash}?s={$size}&d={$default}";
+    $url = "https://seccdn.libravatar.org/avatar/{$hash}?s={$size}&d={$default}";
 
     return $url;
 }
