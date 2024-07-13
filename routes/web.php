@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\HealthCheckController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostTagsController;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Static Routes
-Route::get('/', function () {
-    return view('root');
-})->name('root');
+Route::get('/', [HomeController::class, 'index'])->name('root');
 Route::get('/about', function () {
     return view('static.about');
 })->name('about');
@@ -141,5 +143,14 @@ Route::controller(DashboardController::class)->group(function () {
 Route::get('/admin/rubbish-bin', function () {
     return view('admin.rubbish_bin');
 })->name('admin.rubbish-bin.index');
+
+Route::controller(ConfigController::class)->group(function () {
+    Route::get('/admin/config', 'index')->name('admin.config.index')->middleware(['auth']);
+});
+
+Route::feeds();
+
+//Route::get('health', \Spatie\Health\Http\Controllers\SimpleHealthCheckController::class);
+//Route::get('health', HealthCheckJsonResultsController::class);
 
 Auth::routes(['register' => false]);
