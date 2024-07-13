@@ -44,6 +44,7 @@
         "md-editor-v3": "^2.11.2",
         "md5": "^2.3.0",
         "prism-themes": "^1.9.0",
+        "sortablejs-vue3": "^1.2.11",
         "vue-advanced-cropper": "^2.8.8",
         "vue-chartjs": "^5.2.0",
         "vue-cookies": "^1.8.3"
