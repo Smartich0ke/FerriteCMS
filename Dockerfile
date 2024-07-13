@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build --production
 
 # Stage 2: Setup PHP and dependencies
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 WORKDIR /var/www/html
 
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
     postgresql-client \
-    && docker-php-ext-install pdo pdo_mysql zip pdo_pgsql
+    && docker-php-ext-install pdo pdo_mysql zip pdo_pgsql bcmath
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -32,13 +32,13 @@ RUN composer install --optimize-autoloader
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-COPY ./apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-COPY php.ini /usr/local/etc/php/
+COPY docker/php.ini /usr/local/etc/php/
 
 RUN php artisan storage:link
 
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
