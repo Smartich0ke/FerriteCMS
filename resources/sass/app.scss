@@ -1,5 +1,5 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+//Fonts
+@import 'fonts.scss';
 
 // Variables
 @import 'variables';
@@ -87,6 +87,7 @@ article {
 }
 body {
     background-color: $gray-100;
+    font-family: 'Nunito', sans-serif;
 }
 
 footer {
