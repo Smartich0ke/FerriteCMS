@@ -8,7 +8,7 @@
 
             <div class="text-muted text-center ">
                 <a class="text-muted" href="https://github.com/Smartich0ke/FerriteCMS">Ferrite</a> Content
-                Management System v1.2.1 by Nikolai Patrick.
+                Management System v1.3.0 by Nikolai Patrick.
                 <a class="text-muted me-auto" href="{{ route('login') }}">login</a></div>
         </div>
 
