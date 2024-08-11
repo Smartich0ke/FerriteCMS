@@ -1,9 +1,9 @@
 name: Build Docker Image
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
 
 env:
   COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
