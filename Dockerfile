@@ -19,8 +19,11 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
     postgresql-client \
-    libicu-dev \
-    && docker-php-ext-install pdo pdo_mysql zip pdo_pgsql bcmath intl
+    libicu-dev
+
+RUN docker-php-ext-install pdo pdo_mysql zip pdo_pgsql bcmath intl
+
+RUN pecl install redis && docker-php-ext-enable redis
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
