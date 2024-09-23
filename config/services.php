@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'authentik' => [
+        'client_id' => env('AUTHENTIK_CLIENT_ID'),
+        'client_secret' => env('AUTHENTIK_CLIENT_SECRET'),
+        'base_url' => env('AUTHENTIK_BASE_URL'),
+        'redirect' => '/auth/authentik/callback'
+    ],
+
 ];

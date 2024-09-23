@@ -8,10 +8,13 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OauthController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostTagsController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Static Routes
+//==================================================================================================
 Route::get('/', [HomeController::class, 'index'])->name('root');
 Route::get('/about', function () {
     return view('static.about');
@@ -33,6 +37,8 @@ Route::get('/pc-repair', function () {
     return view('static.pc_repair');
 })->name('pc-repair');
 
+// Health Check Endpoints
+//==================================================================================================
 Route::controller(HealthCheckController::class)->group(function () {
     Route::get('/readiness', 'readiness');
     Route::get('/liveness', 'liveness');
@@ -146,6 +152,11 @@ Route::get('/admin/rubbish-bin', function () {
 
 Route::controller(ConfigController::class)->group(function () {
     Route::get('/admin/config', 'index')->name('admin.config.index')->middleware(['auth']);
+});
+
+Route::controller(OauthController::class)->group(function () {
+    Route::get('/auth/{provider}/redirect', 'redirect')->name('oauth.redirect');
+    Route::get('/auth/{provider}/callback', 'handleOAuthCallback')->name('oauth.callback');
 });
 
 Route::feeds();

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use OAuthProvider;
 
 /**
  * App\Models\User
@@ -56,6 +57,11 @@ class User extends Authenticatable
     public function files()
     {
         return $this->hasMany(File::class);
+    }
+
+    public function oauthConnections()
+    {
+        return $this->hasMany(OauthConnection::class);
     }
 
     /**

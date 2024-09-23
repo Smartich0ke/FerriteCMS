@@ -200,7 +200,11 @@
             @yield('content')
         </main>
     </div>
+
+    <x-toast />
+
 </div>
+
 @yield('post-app')
 </body>
 </html>

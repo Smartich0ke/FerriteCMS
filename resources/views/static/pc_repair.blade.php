@@ -18,7 +18,8 @@
         I can also help with other issues, just ask!
     </p>
     <p>
-        I charge $40 per hour, with an initial charge of $15. Just contact me to arrange a time to drop off your PC, and I will get back to you with a quote. I am located in the southern suburbs of Adelaide.
+
+        Just contact me to arrange a time to drop off your PC, and I will get back to you with a quote. I am located in the southern suburbs of Adelaide.
     </p>
     <p>
         If you are interested, please contact me at <a href="mailto:{{ config('contact.email') }}">{{ config('contact.email') }}</a> or phone me at <a href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a>.
