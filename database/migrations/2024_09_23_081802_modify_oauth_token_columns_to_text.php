@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('oauth_connections', function (Blueprint $table) {
-            $table->text('access_token')->change();
+            $table->text('token')->change();
             $table->text('refresh_token')->change();
         });
     }
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('oauth_connections', function (Blueprint $table) {
-            $table->string('access_token', 255)->change();
+            $table->string('token', 255)->change();
             $table->string('refresh_token', 255)->nullable()->change();
         });
     }
