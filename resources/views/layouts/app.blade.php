@@ -53,8 +53,11 @@
             @include('layouts.footer')
         </footer>
 
+        <x-toast />
+
     </div>
-@yield('post-app')
+
+    @yield('post-app')
 </body>
 
 </html>
