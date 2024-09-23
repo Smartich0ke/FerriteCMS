@@ -31,7 +31,6 @@ class OauthController extends Controller
 
             // Log the user in
             Auth::login($user);
-
             return redirect('/admin/dashboard')->with('toast-success', 'Logged in successfully using ' . ucfirst($provider));
         }
 
@@ -56,5 +55,16 @@ class OauthController extends Controller
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
+    }
+
+    public function disconnect($provider)
+    {
+        $user = Auth::user();
+        $oauthConnection = $user->oauthConnections()->where('provider', $provider)->first();
+        if ($oauthConnection) {
+            $oauthConnection->delete();
+            return redirect()->route('profile')->with('toast-success', ucfirst($provider) . ' account successfully disconnected.');
+        }
+        return redirect()->route('profile')->with('toast-fail', ucfirst($provider) . ' account not found.');
     }
 }

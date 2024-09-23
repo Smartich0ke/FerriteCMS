@@ -157,6 +157,7 @@ Route::controller(ConfigController::class)->group(function () {
 Route::controller(OauthController::class)->group(function () {
     Route::get('/auth/{provider}/redirect', 'redirect')->name('oauth.redirect');
     Route::get('/auth/{provider}/callback', 'handleOAuthCallback')->name('oauth.callback');
+    Route::get('/auth/{provider}/disconnect', 'disconnect')->name('oauth.disconnect')->middleware(['auth']);
 });
 
 Route::feeds();

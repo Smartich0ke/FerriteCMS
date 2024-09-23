@@ -35,7 +35,10 @@ class DashboardController extends Controller
     }
 
     public function profile() {
-        return view('admin.profile');
+        $connections = auth()->user()->oauthConnections;
+        return view('admin.profile', [
+            'connections' => $connections
+        ]);
     }
 
     public function updateProfile(Request $request) {

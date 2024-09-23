@@ -32,6 +32,8 @@ return [
     ],
 
     'authentik' => [
+        'enabled' => env('AUTHENTIK_ENABLED', false),
+        'icon' => env('AUTHENTIK_ICON', 'https://auth.artichoke.cc/static/dist/assets/icons/icon.svg'),
         'client_id' => env('AUTHENTIK_CLIENT_ID'),
         'client_secret' => env('AUTHENTIK_CLIENT_SECRET'),
         'base_url' => env('AUTHENTIK_BASE_URL'),
